@@ -1,6 +1,4 @@
 package panto.technoevents.fragments;
-
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,17 +24,12 @@ public class TechnoDjsFragment extends Fragment {
     private RecyclerView recyclerView;
     private DjAdapter djAdapter;
 
-
-    public TechnoDjsFragment() {
-        // Required empty public constructor
-    }
-
+    public TechnoDjsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
-
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
         Retrofit retrofit = RetrofitSingleton.getRetrofitSingleton();
