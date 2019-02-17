@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface DjRequest {
 
-    @GET("joesalcedonyc/86d3bf61d0bc61d2638e6ad8100bd3b2/raw/d4a048c91f6a0a6473c7eac52e4e9d4399bf2855/technodjs.json")
+    @GET("joesalcedonyc/86d3bf61d0bc61d2638e6ad8100bd3b2/raw/5d74d9e8515ce32f5c8d0fa891efeaaf6f7429f3/technodjs.json")
     Call<DjWrapper> getDjs();
 }
