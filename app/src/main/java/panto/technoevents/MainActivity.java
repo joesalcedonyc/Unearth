@@ -15,15 +15,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        TechnoDjsFragment technoDjsFragment = new TechnoDjsFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.main_container, technoDjsFragment);
-//        fragmentTransaction.commit();
-        LoginFragment loginFragment = new LoginFragment();
+        TechnoDjsFragment technoDjsFragment = new TechnoDjsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, loginFragment);
+        fragmentTransaction.replace(R.id.main_container, technoDjsFragment);
         fragmentTransaction.commit();
+
+//        LoginFragment loginFragment = new LoginFragment();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.main_container, loginFragment);
+//        fragmentTransaction.commit();
     }
 }

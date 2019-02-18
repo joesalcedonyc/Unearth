@@ -25,16 +25,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:layout_centerInParent="true"
-                android:contentDescription="@string/press_shot_of_dj"
-                 />
+                android:contentDescription="@string/press_shot_of_dj" />
 
             <TextView
                 android:id="@+id/artist_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/artist_image"
-                android:layout_marginTop="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/artist_image"
                 android:gravity="center"
                 android:textSize="30sp" />
             <!--android:layout_toEndOf= "@+id/artist_image"-->

@@ -1,6 +1,4 @@
 package panto.technoevents.fragments;
-
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +21,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_login, container, false);
         videoView = rootView.findViewById(R.id.login_video_background);
-        Uri uri = Uri.parse("android.resource://"+getActivity().getPackageName() + "/" + R.raw.beyer);
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.beyer);
         videoView.setVideoURI(uri);
         videoView.start();
         return rootView;
