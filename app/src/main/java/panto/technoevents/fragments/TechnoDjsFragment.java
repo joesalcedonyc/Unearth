@@ -25,6 +25,9 @@ public class TechnoDjsFragment extends Fragment {
     private DjAdapter djAdapter;
 
     public TechnoDjsFragment() {}
+    public static TechnoDjsFragment newinstance(){
+        return new TechnoDjsFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

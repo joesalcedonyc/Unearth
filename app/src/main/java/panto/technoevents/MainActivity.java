@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TechnoDjsFragment technoDjsFragment = new TechnoDjsFragment();
+        TechnoDjsFragment technoDjsFragment = TechnoDjsFragment.newinstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, technoDjsFragment);
