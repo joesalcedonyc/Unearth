@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, technoDjsFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit(); //
 
 //        LoginFragment loginFragment = new LoginFragment();
 //        FragmentManager fragmentManager = getSupportFragmentManager();
