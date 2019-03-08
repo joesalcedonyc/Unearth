@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import panto.technoevents.DjWrapper;
+import panto.technoevents.model.DjResponse;
 import panto.technoevents.R;
 import panto.technoevents.controller.DjAdapter;
-import panto.technoevents.service.DjRequest;
-import panto.technoevents.service.RetrofitSingleton;
+import panto.technoevents.network.DjRequest;
+import panto.technoevents.network.RetrofitDjsSingleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,12 +35,12 @@ public class TechnoDjsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
-        Retrofit retrofit = RetrofitSingleton.getRetrofitSingleton();
+        Retrofit retrofit = RetrofitDjsSingleton.getDjsRetrofitInstance();
         final DjRequest djRequest = retrofit.create(DjRequest.class);
-        Call<DjWrapper> djs = djRequest.getDjs();
-        djs.enqueue(new Callback<DjWrapper>() {
+        Call<DjResponse> djs = djRequest.getDjs();
+        djs.enqueue(new Callback<DjResponse>() {
             @Override
-            public void onResponse(Call<DjWrapper> call, Response<DjWrapper> response) {
+            public void onResponse(Call<DjResponse> call, Response<DjResponse> response) {
                 Log.d("joestag", "onResponse: " + response.body().getDjs().get(0).getImage());
                 djAdapter = new DjAdapter(response.body().getDjs());
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -50,7 +50,7 @@ public class TechnoDjsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<DjWrapper> call, Throwable t) {
+            public void onFailure(Call<DjResponse> call, Throwable t) {
                 Log.d("joestag", "onFailure: " + t.getMessage());
             }
         });

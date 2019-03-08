@@ -2,6 +2,7 @@ package panto.technoevents.controller;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull DjViewHolder djViewHolder, int i) {
         djViewHolder.onBind(djList.get(i));
+        Log.d("joesAdapter", "AdapteronBind");
 
     }
 

@@ -1,10 +1,10 @@
-package panto.technoevents;
+package panto.technoevents.model;
 
 import java.util.List;
 
 import panto.technoevents.model.DjModel;
 
-public class DjWrapper {
+public class DjResponse {
 
     private List<DjModel> djs;
 
