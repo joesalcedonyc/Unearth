@@ -23,20 +23,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Retrofit retrofit = EDMTrainRetrofitSingleton.getEDMTrainRetrofitInstance();
-        retrofit.create(EDMTrainInterface.class)
-                .getEDMResponse(237)
-                .enqueue(new Callback<EDMTrainResponse>() {
-                    @Override
-                    public void onResponse(Call<EDMTrainResponse> call, Response<EDMTrainResponse> response) {
-                        Log.d("joestag", "onResponse: " + response.body().getData().get(0).getArtistList().get(0).getName());
-                    }
-
-                    @Override
-                    public void onFailure(Call<EDMTrainResponse> call, Throwable t) {
-
-                    }
-                });
+//        Retrofit retrofit = EDMTrainRetrofitSingleton.getEDMTrainRetrofitInstance();
+//        retrofit.create(EDMTrainInterface.class)
+//                .getEDMResponse(237)
+//                .enqueue(new Callback<EDMTrainResponse>() {
+//                    @Override
+//                    public void onResponse(Call<EDMTrainResponse> call, Response<EDMTrainResponse> response) {
+//                        Log.d("joestag", "onResponse: " + response.body().getData().get(0).getVenue().getLocation());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<EDMTrainResponse> call, Throwable t) {
+//                        Log.d("joestag", "onFailure: " + t.getMessage());
+//
+//
+//                    }
+//                });
 
         TechnoDjsFragment technoDjsFragment = TechnoDjsFragment.newinstance();
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -1,4 +1,4 @@
-package panto.technoevents.model;
+package panto.technoevents.model.djgist;
 
 public class DjModel {
 

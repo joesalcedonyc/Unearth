@@ -1,8 +1,8 @@
-package panto.technoevents.model;
+package panto.technoevents.model.djgist;
 
 import java.util.List;
 
-import panto.technoevents.model.DjModel;
+import panto.technoevents.model.djgist.DjModel;
 
 public class DjResponse {
 

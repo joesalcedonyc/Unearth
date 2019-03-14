@@ -1,5 +1,9 @@
 package panto.technoevents.fragments;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import panto.technoevents.model.DjResponse;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import panto.technoevents.R;
 import panto.technoevents.controller.DjAdapter;
 import panto.technoevents.network.DjRequest;
 import panto.technoevents.network.RetrofitDjsSingleton;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class TechnoDjsFragment extends Fragment {
 
@@ -29,31 +30,36 @@ public class TechnoDjsFragment extends Fragment {
         return new TechnoDjsFragment();
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
+       rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
-
-        Retrofit retrofit = RetrofitDjsSingleton.getDjsRetrofitInstance();
-        final DjRequest djRequest = retrofit.create(DjRequest.class);
-        Call<DjResponse> djs = djRequest.getDjs();
-        djs.enqueue(new Callback<DjResponse>() {
-            @Override
-            public void onResponse(Call<DjResponse> call, Response<DjResponse> response) {
-                Log.d("joestag", "onResponse: " + response.body().getDjs().get(0).getImage());
-                djAdapter = new DjAdapter(response.body().getDjs());
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.VERTICAL, false);
-                djAdapter.notifyDataSetChanged();
-                recyclerView.setAdapter(djAdapter);
-                recyclerView.setLayoutManager(linearLayoutManager);
-            }
-
-            @Override
-            public void onFailure(Call<DjResponse> call, Throwable t) {
-                Log.d("joestag", "onFailure: " + t.getMessage());
-            }
-        });
+        RetrofitDjsSingleton.getDjsRetrofitInstance()
+                .create(DjRequest.class)
+                .getDjs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(djResponse -> {
+                    Log.d("joestag", "onResponse: " + djResponse
+                            .getDjs().get(0)
+                            .getImage());
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                            rootView.getContext(),
+                            LinearLayoutManager.VERTICAL,
+                            false);
+                    djAdapter = new DjAdapter(djResponse.getDjs());
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.setAdapter(djAdapter);
+                },
+                        throwable -> Log.d("joestag", "onFailure: " + throwable.getMessage()));
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

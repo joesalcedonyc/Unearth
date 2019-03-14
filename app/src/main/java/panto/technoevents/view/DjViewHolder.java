@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import panto.technoevents.R;
-import panto.technoevents.model.DjModel;
+import panto.technoevents.model.djgist.DjModel;
 
 public class DjViewHolder extends RecyclerView.ViewHolder {
 

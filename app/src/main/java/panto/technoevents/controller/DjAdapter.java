@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import panto.technoevents.R;
-import panto.technoevents.model.DjModel;
+import panto.technoevents.model.EDMTrain.Data;
+import panto.technoevents.model.djgist.DjModel;
 import panto.technoevents.view.DjViewHolder;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
 
     List<DjModel> djList;
+
     public DjAdapter(List<DjModel> djList){
         this.djList = djList;
     }
@@ -30,8 +32,7 @@ public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull DjViewHolder djViewHolder, int i) {
         djViewHolder.onBind(djList.get(i));
-        Log.d("joesAdapter", "AdapteronBind");
-
+        Log.d("onBindAdapter", "AdapteronBind");
     }
 
     @Override
