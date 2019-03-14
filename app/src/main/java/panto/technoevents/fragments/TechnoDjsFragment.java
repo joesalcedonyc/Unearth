@@ -25,8 +25,10 @@ public class TechnoDjsFragment extends Fragment {
     private RecyclerView recyclerView;
     private DjAdapter djAdapter;
 
-    public TechnoDjsFragment() {}
-    public static TechnoDjsFragment newinstance(){
+    public TechnoDjsFragment() {
+    }
+
+    public static TechnoDjsFragment newinstance() {
         return new TechnoDjsFragment();
     }
 
@@ -34,26 +36,32 @@ public class TechnoDjsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
+        rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
+
         RetrofitDjsSingleton.getDjsRetrofitInstance()
                 .create(DjRequest.class)
                 .getDjs()
+
                 .subscribeOn(Schedulers.io())
+
                 .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribe(djResponse -> {
-                    Log.d("joestag", "onResponse: " + djResponse
-                            .getDjs().get(0)
-                            .getImage());
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                            rootView.getContext(),
-                            LinearLayoutManager.VERTICAL,
-                            false);
-                    djAdapter = new DjAdapter(djResponse.getDjs());
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.setAdapter(djAdapter);
-                },
-                        throwable -> Log.d("joestag", "onFailure: " + throwable.getMessage()));
+                            Log.d("TechnoDjsRequest", "onNext: " + djResponse
+                                    .getDjs().get(0)
+                                    .getImage());
+
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                                    rootView.getContext(),
+                                    LinearLayoutManager.VERTICAL,
+                                    false);
+
+                            djAdapter = new DjAdapter(djResponse.getDjs());
+                            recyclerView.setLayoutManager(linearLayoutManager);
+                            recyclerView.setAdapter(djAdapter);
+                        },
+                        throwable -> Log.d("TechnoDjsRequest", "onError: " + throwable.getMessage()));
         return rootView;
     }
 

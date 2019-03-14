@@ -1,11 +1,16 @@
 package panto.technoevents;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import panto.technoevents.fragments.LoginFragment;
 import panto.technoevents.fragments.TechnoDjsFragment;
 import panto.technoevents.model.EDMTrain.EDMTrainResponse;
@@ -18,38 +23,44 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Retrofit retrofit = EDMTrainRetrofitSingleton.getEDMTrainRetrofitInstance();
-//        retrofit.create(EDMTrainInterface.class)
-//                .getEDMResponse(237)
-//                .enqueue(new Callback<EDMTrainResponse>() {
-//                    @Override
-//                    public void onResponse(Call<EDMTrainResponse> call, Response<EDMTrainResponse> response) {
-//                        Log.d("joestag", "onResponse: " + response.body().getData().get(0).getVenue().getLocation());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<EDMTrainResponse> call, Throwable t) {
-//                        Log.d("joestag", "onFailure: " + t.getMessage());
-//
-//
-//                    }
-//                });
+        EDMTrainRetrofitSingleton.getEDMTrainRetrofitInstance()
+                .create(EDMTrainInterface.class)
+                .getEDMResponse(237)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<EDMTrainResponse>() {
+                               @Override
+                               public void accept(EDMTrainResponse edmTrainResponse) throws Exception {
+                                   Log.d("EDMTrainRequest", "onNext: " + edmTrainResponse
+                                           .getData().get(0)
+                                           .getVenue()
+                                           .getLocation());
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                Log.d("EDMTrainRequest", "onError: " + throwable.getMessage());
+
+                            }
+                        });
+
 
         TechnoDjsFragment technoDjsFragment = TechnoDjsFragment.newinstance();
+        switchFragment(technoDjsFragment);
+
+    }
+
+    private void switchFragment(TechnoDjsFragment technoDjsFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, technoDjsFragment);
         fragmentTransaction.commit();
-
-//        LoginFragment loginFragment = new LoginFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.main_container, loginFragment);
-//        fragmentTransaction.commit();
     }
 }
