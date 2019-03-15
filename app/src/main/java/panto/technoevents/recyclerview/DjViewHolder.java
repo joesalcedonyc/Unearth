@@ -23,7 +23,6 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
 
         artistNameTextView = itemView.findViewById(R.id.artist_textView);
         artist_press_shot = itemView.findViewById(R.id.artist_image);
-        Log.d("joesviewholdertag", "viewHolder:");
     }
 
     public void onBind (final DjModel djModel){
@@ -31,6 +30,6 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
         Picasso.get().load(djModel.getImage())
                 .resize(600, 380)
                 .into(artist_press_shot);
-        Log.d("joesviewholdertag", "onBind:");
+
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(this::logResponse,
                         this::logThrowable);
 
-        TechnoDjsFragment technoDjsFragment = TechnoDjsFragment.newinstance();
+        TechnoDjsFragment technoDjsFragment = TechnoDjsFragment.newInstance();
         toFragment(technoDjsFragment);
 
     }
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("EDMTrainRequest", "Response: " + edmTrainResponse
                 .getEvents().get(0)
                 .getVenue()
-                .getLocation());
+                .getAddress());
     }
 
     private void logThrowable(Throwable throwable) {

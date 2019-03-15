@@ -1,6 +1,7 @@
 package panto.technoevents.UI;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModel;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
@@ -24,11 +26,7 @@ public class TechnoDjsFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
 
-
-    public TechnoDjsFragment() {
-    }
-
-    public static TechnoDjsFragment newinstance() {
+    public static TechnoDjsFragment newInstance() {
         return new TechnoDjsFragment();
     }
 
@@ -42,23 +40,20 @@ public class TechnoDjsFragment extends Fragment {
         DjRepository.getInstance()
                 .getAllDjs()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<DjModel>>() {
-                               @Override
-                               public void accept(List<DjModel> djModels) throws Exception {
-                                   Log.d("TechnoDjsRequest", "TechnoDjsResponse: "
-                                           + djModels.get(0).getId());
+                .subscribe(djModels -> {
+                            Log.d("TechnoDjsRequest", "Response: "
+                                    + djModels.get(0).getId());
 
-                                   recyclerView.setLayoutManager(new LinearLayoutManager(
-                                           rootView.getContext(),
-                                           LinearLayoutManager.VERTICAL,
-                                           false
-                                   ));
-                                   recyclerView.setAdapter(new DjAdapter(djModels));
-                               }
-                           },
-                        throwable -> Log.d(
-                                "TechnoDjsRequest", "TechnoDjsThrowable: "
-                                        + throwable.getMessage()));
+                            recyclerView.setLayoutManager(new LinearLayoutManager(
+                                    rootView.getContext(),
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                            ));
+                            recyclerView.setAdapter(new DjAdapter(djModels));
+                        },
+                        throwable -> Log.d("TechnoDjsRequest", "Throwable: "
+                                + throwable.getMessage()));
+
 
         return rootView;
     }

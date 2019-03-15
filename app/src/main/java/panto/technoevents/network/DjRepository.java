@@ -66,7 +66,8 @@ public class DjRepository {
                     public List<Events> apply(EDMTrainResponse response) throws Exception {
                         return response.getEvents();
                     }
-                });
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     public Observable<List<Events>> getRecentEvents(int djId, int count) {
