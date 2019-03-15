@@ -1,4 +1,4 @@
-package panto.technoevents.view;
+package panto.technoevents.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import panto.technoevents.R;
-import panto.technoevents.model.djgist.DjModel;
+import panto.technoevents.apimodels.djs.DjModel;
 
 public class DjViewHolder extends RecyclerView.ViewHolder {
 

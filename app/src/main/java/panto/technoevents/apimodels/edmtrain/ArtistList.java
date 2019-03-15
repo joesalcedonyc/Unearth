@@ -1,4 +1,4 @@
-package panto.technoevents.model.EDMTrain;
+package panto.technoevents.apimodels.edmtrain;
 
 public class ArtistList {
     private int id;

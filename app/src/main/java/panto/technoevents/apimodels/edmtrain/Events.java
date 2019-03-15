@@ -1,8 +1,8 @@
-package panto.technoevents.model.EDMTrain;
+package panto.technoevents.apimodels.edmtrain;
 
 import java.util.List;
 
-public class Data {
+public class Events {
     private String link;
     private String ticketLink;
     private String date;

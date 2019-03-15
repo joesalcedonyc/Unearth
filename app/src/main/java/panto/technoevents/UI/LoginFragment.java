@@ -1,4 +1,4 @@
-package panto.technoevents.fragments;
+package panto.technoevents.UI;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

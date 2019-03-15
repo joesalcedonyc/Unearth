@@ -4,20 +4,20 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EDMTrainRetrofitSingleton {
-    private static Retrofit edmTrainRetrofitInstance;
+public class EventRetrofitProvider {
+    private static Retrofit instance;
 
-    private EDMTrainRetrofitSingleton() {
+    private EventRetrofitProvider() {
     }
 
-    public static Retrofit getEDMTrainRetrofitInstance() {
-        if (edmTrainRetrofitInstance == null) {
-            edmTrainRetrofitInstance = new Retrofit.Builder()
+    public static Retrofit getInstance() {
+        if (instance == null) {
+            instance = new Retrofit.Builder()
                     .baseUrl("https://edmtrain.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
-        return edmTrainRetrofitInstance;
+        return instance;
     }
 }

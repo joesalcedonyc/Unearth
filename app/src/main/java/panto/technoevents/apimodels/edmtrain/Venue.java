@@ -1,4 +1,4 @@
-package panto.technoevents.model.EDMTrain;
+package panto.technoevents.apimodels.edmtrain;
 
 public class Venue {
     private String name;
