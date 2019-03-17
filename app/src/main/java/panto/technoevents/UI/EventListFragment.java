@@ -7,12 +7,18 @@ import android.view.ViewGroup;
 import android.widget.VideoView;
 
 import panto.technoevents.R;
+import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.apimodels.edmtrain.Events;
 
 public class EventListFragment extends Fragment {
     private View rootView;
-    private VideoView videoView;
 
     public EventListFragment() {
+    }
+
+    public static EventListFragment newInstance(DjModel djModel){
+        return new EventListFragment();
+
     }
 
     @Override

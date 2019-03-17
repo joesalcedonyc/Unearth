@@ -1,6 +1,8 @@
 package panto.technoevents;
 
+import panto.technoevents.apimodels.djs.DjModel;
+
 public interface FragmentInterface {
 
-    void toEventListFrag(int djId);
+    void fragmentNavigation(DjModel djModel);
 }

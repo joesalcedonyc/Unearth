@@ -2,9 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/dj_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
@@ -25,18 +27,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/press_shot_of_dj" />
 
             <TextView
+                tools:text = "Adam Beyer"
                 android:id="@+id/artist_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/artist_image"
                 android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:textSize="30sp" />
-            <!--android:layout_toEndOf= "@+id/artist_image"-->
+                android:layout_alignLeft="@+id/artist_image"
+                android:textSize="25sp" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

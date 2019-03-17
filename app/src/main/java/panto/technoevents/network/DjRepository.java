@@ -50,23 +50,13 @@ public class DjRepository {
 
     public Observable<List<DjModel>> getAllDjs() {
         return djApi.getDjs()
-                .map(new Function<DjResponse, List<DjModel>>() {
-                    @Override
-                    public List<DjModel> apply(DjResponse response) throws Exception {
-                        return response.getDjs();
-                    }
-                })
+                .map(response -> response.getDjs())
                 .subscribeOn(Schedulers.io());
     }
 
     public Observable<List<Events>> getAllDjEvents(int djId) {
         return eventsApi.getArtistEvents(djId)
-                .map(new Function<EDMTrainResponse, List<Events>>() {
-                    @Override
-                    public List<Events> apply(EDMTrainResponse response) throws Exception {
-                        return response.getEvents();
-                    }
-                })
+                .map(response -> response.getEvents())
                 .subscribeOn(Schedulers.io());
     }
 

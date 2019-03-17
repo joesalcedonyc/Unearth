@@ -1,7 +1,7 @@
 package panto.technoevents.UI;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,20 +14,33 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import panto.technoevents.FragmentInterface;
 import panto.technoevents.R;
-import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.apimodels.edmtrain.Events;
 import panto.technoevents.recyclerview.DjAdapter;
 import panto.technoevents.network.DjRepository;
 
-public class TechnoDjsFragment extends Fragment {
+public class DjsFragment extends Fragment {
 
     private View rootView;
     private RecyclerView recyclerView;
+    private FragmentInterface fragmentInterface;
 
-    public static TechnoDjsFragment newInstance() {
-        return new TechnoDjsFragment();
+
+    public static DjsFragment newInstance() {
+        return new DjsFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof FragmentInterface) {
+          fragmentInterface = (FragmentInterface) context;
+        } else {
+            throw new RuntimeException(context.toString() + "must be instance of MainActivity");
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -49,10 +62,22 @@ public class TechnoDjsFragment extends Fragment {
                                     LinearLayoutManager.VERTICAL,
                                     false
                             ));
-                            recyclerView.setAdapter(new DjAdapter(djModels));
+
+                            recyclerView.setAdapter(new DjAdapter(djModels, fragmentInterface));
+
                         },
+
                         throwable -> Log.d("TechnoDjsRequest", "Throwable: "
                                 + throwable.getMessage()));
+
+        DjRepository.getInstance()
+                .getAllDjEvents(237)
+                .subscribe(events -> Log.d("EdmTrainRequest", "Response: "
+                                + events.get(0)
+                                .getDate()),
+
+                        throwable -> Log.d("EdmTrainRequest", "Throwable: "
+                                + throwable));
 
 
         return rootView;
