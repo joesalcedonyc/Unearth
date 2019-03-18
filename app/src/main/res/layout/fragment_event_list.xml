@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".UI.EventListFragment">
 
     <ImageView
+        tools:src ="@drawable/splashtwo"
         android:id="@+id/event_list_artist_ImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,11 +20,13 @@
     <TextView
         android:id="@+id/event_list_artist_name_textView" tools:text="Adam Beyer"
         android:textSize="25sp"
+        android:layout_marginStart="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/event_list_artist_ImageView" />
+        app:layout_constraintTop_toBottomOf="@id/event_list_artist_ImageView"
+        app:layout_constraintBottom_toTopOf="@+id/event_list_recyclerView"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/event_list_recyclerView"
@@ -33,7 +36,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_list_artist_name_textView">
-
     </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
