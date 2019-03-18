@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginStart="8dp"
             android:id="@+id/venue_textView"
             tools:text="Cielo"
             android:layout_width="match_parent"
@@ -23,24 +24,35 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginStart="8dp"
             android:id="@+id/date_textView"
             tools:text="05.31.2019"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_marginStart="8dp"
             android:id="@+id/location_textView"
             tools:text="New York, NY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <TextView
+            android:layout_marginStart="8dp"
             android:id="@+id/address_textView"
             tools:text="18 Little W 12th St New York, NY 10014"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <ImageView
+            android:id="@+id/share_event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_share_24dp"/>
 
     </LinearLayout>
 

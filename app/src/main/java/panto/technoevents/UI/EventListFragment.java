@@ -1,6 +1,8 @@
 package panto.technoevents.UI;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -30,10 +33,7 @@ public class EventListFragment extends Fragment {
     private static int artistId;
     private static String artistImageUrl;
     private static String artistName;
-
     private RecyclerView recyclerView;
-    private ImageView eventListArtistImageView;
-    private TextView eventListArtistNameTextView;
 
 
     public EventListFragment() {
@@ -45,8 +45,6 @@ public class EventListFragment extends Fragment {
         artistImageUrl = djModel.getImage();
         artistName = djModel.getName();
 
-
-        Log.d("DjId:", " " + djModel.getId());
         return new EventListFragment();
 
     }
@@ -56,13 +54,12 @@ public class EventListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(
-                R.layout.fragment_event_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
 
         recyclerView = rootView.findViewById(R.id.event_list_recyclerView);
 
-        eventListArtistImageView = rootView.findViewById(R.id.event_list_artist_ImageView);
-        eventListArtistNameTextView = rootView.findViewById(R.id.event_list_artist_name_textView);
+        ImageView eventListArtistImageView = rootView.findViewById(R.id.event_list_artist_ImageView);
+        TextView eventListArtistNameTextView = rootView.findViewById(R.id.event_list_artist_name_textView);
 
         Log.d("artistname", artistName);
         Log.d("artistimage", artistImageUrl);
@@ -76,23 +73,19 @@ public class EventListFragment extends Fragment {
         DjRepository.getInstance()
                 .getAllDjEvents(artistId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Events>>() {
-                               @Override
-                               public void accept(List<Events> events) throws Exception {
-                                   Log.d("EdmTrainRequest", "Response: " +
-                                           events.get(0)
-                                                   .getVenue()
-                                                   .getName());
+                .subscribe(events -> {
+                            Log.d("EdmTrainRequest", "Response: " +
+                                    events.get(0)
+                                            .getVenue()
+                                            .getName());
 
 
-                                   recyclerView.setLayoutManager(new LinearLayoutManager(
-                                           rootView.getContext(),
-                                           LinearLayoutManager.VERTICAL,
-                                           false));
-                                   recyclerView.setAdapter(new EventListAdapter(events));
-
-                               }
-                           },
+                            recyclerView.setLayoutManager(new LinearLayoutManager(
+                                    rootView.getContext(),
+                                    LinearLayoutManager.VERTICAL,
+                                    false));
+                            recyclerView.setAdapter(new EventListAdapter(events));
+                        },
 
                         throwable -> Log.d("EdmTrainRequest", "Throwable: "
                                 + throwable));
