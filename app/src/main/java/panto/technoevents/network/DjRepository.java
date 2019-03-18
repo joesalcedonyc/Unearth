@@ -56,7 +56,12 @@ public class DjRepository {
 
     public Observable<List<Events>> getAllDjEvents(int djId) {
         return eventsApi.getArtistEvents(djId)
-                .map(response -> response.getEvents())
+                .map(new Function<EDMTrainResponse, List<Events>>() {
+                    @Override
+                    public List<Events> apply(EDMTrainResponse response) throws Exception {
+                        return response.getEvents();
+                    }
+                })
                 .subscribeOn(Schedulers.io());
     }
 

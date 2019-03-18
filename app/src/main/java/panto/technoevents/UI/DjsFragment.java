@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import panto.technoevents.FragmentInterface;
 import panto.technoevents.R;
+import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.edmtrain.Events;
 import panto.technoevents.recyclerview.DjAdapter;
 import panto.technoevents.network.DjRepository;
@@ -53,32 +54,25 @@ public class DjsFragment extends Fragment {
         DjRepository.getInstance()
                 .getAllDjs()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(djModels -> {
-                            Log.d("TechnoDjsRequest", "Response: "
-                                    + djModels.get(0).getId());
+                .subscribe(new Consumer<List<DjModel>>() {
+                               @Override
+                               public void accept(List<DjModel> djModels) throws Exception {
+                                   Log.d("TechnoDjsRequest", "Response: "
+                                           + djModels.get(0).getId());
 
-                            recyclerView.setLayoutManager(new LinearLayoutManager(
-                                    rootView.getContext(),
-                                    LinearLayoutManager.VERTICAL,
-                                    false
-                            ));
+                                   recyclerView.setLayoutManager(new LinearLayoutManager(
+                                           rootView.getContext(),
+                                           LinearLayoutManager.VERTICAL,
+                                           false
+                                   ));
 
-                            recyclerView.setAdapter(new DjAdapter(djModels, fragmentInterface));
+                                   recyclerView.setAdapter(new DjAdapter(djModels, fragmentInterface));
 
-                        },
+                               }
+                           },
 
                         throwable -> Log.d("TechnoDjsRequest", "Throwable: "
                                 + throwable.getMessage()));
-
-        DjRepository.getInstance()
-                .getAllDjEvents(237)
-                .subscribe(events -> Log.d("EdmTrainRequest", "Response: "
-                                + events.get(0)
-                                .getDate()),
-
-                        throwable -> Log.d("EdmTrainRequest", "Throwable: "
-                                + throwable));
-
 
         return rootView;
     }
