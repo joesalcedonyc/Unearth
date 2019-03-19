@@ -20,4 +20,5 @@ public class DjModel {
     public String getImage() {
         return image;
     }
+
 }

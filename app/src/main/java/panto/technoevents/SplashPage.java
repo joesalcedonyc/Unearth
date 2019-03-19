@@ -14,10 +14,10 @@ public class SplashPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_page);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                Intent i = new Intent(SplashPage.this, MainActivity.class); startActivity(i);
-                finish(); } }, 3000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override public void run() {
+//                Intent i = new Intent(SplashPage.this, MainActivity.class); startActivity(i);
+//                finish(); } }, 3000);
     }
 
 }

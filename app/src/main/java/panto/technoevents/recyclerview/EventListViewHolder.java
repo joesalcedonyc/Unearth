@@ -1,6 +1,7 @@
 package panto.technoevents.recyclerview;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
     private String eventDate;
     private String eventLocation;
     private String eventAddress;
+    private String noUpcoming;
 
     public EventListViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -41,14 +43,15 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
         eventDate = events.getDate();
         eventLocation = events.getVenue().getLocation();
         eventAddress = events.getVenue().getAddress();
+        noUpcoming = itemView.getContext().getString(R.string.no_upcoming_shows);
 
         venueTextView.setText(venue);
         dateTextView.setText(eventDate);
         locationTextView.setText(eventLocation);
         addressTextView.setText(eventAddress);
 
-        String artists = Arrays.deepToString(events.getArtistList().toArray());
-        String artistsTwo = artists.substring(1, artists.length() - 1);
+        final String artists = Arrays.deepToString(events.getArtistList().toArray());
+        final String artistsTwo = artists.substring(1, artists.length() - 1);
 
         itemView.findViewById(R.id.share_event_button)
                 .setOnClickListener(new View.OnClickListener() {
