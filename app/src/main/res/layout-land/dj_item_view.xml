@@ -29,7 +29,7 @@
                 android:contentDescription="@string/press_shot_of_dj" />
 
             <TextView
-                android:id="@+id/artist_textView"
+                android:id="@+id/artist_name_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

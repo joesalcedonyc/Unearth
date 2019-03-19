@@ -23,7 +23,7 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
     public DjViewHolder(@NonNull View itemView, FragmentInterface fragmentInterface) {
         super(itemView);
 
-        artistNameTextView = itemView.findViewById(R.id.artist_textView);
+        artistNameTextView = itemView.findViewById(R.id.artist_name_textView);
         artistImageView = itemView.findViewById(R.id.artist_image);
         this.fragmentInterface = fragmentInterface;
 
