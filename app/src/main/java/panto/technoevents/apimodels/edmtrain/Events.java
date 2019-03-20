@@ -5,6 +5,7 @@ import java.util.List;
 public class Events {
     private String link;
     private String ticketLink;
+    private String name;
     private String date;
     private Venue venue;
     private List<ArtistList> artistList;
@@ -15,6 +16,10 @@ public class Events {
 
     public String getTicketLink() {
         return ticketLink;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getDate() {
@@ -28,4 +33,5 @@ public class Events {
     public List<ArtistList> getArtistList() {
         return artistList;
     }
+
 }

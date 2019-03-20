@@ -28,8 +28,6 @@ public class EventListFragment extends Fragment {
     private static String artistImageUrl;
     private static String artistName;
     private RecyclerView recyclerView;
-    int i = 0;
-
 
     public EventListFragment() {
     }
@@ -50,14 +48,10 @@ public class EventListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
-
         recyclerView = rootView.findViewById(R.id.event_list_recyclerView);
 
         ImageView eventListArtistImageView = rootView.findViewById(R.id.event_list_artist_ImageView);
         TextView eventListArtistNameTextView = rootView.findViewById(R.id.event_list_artist_name_textView);
-
-        Log.d("artistname", artistName);
-        Log.d("artistimage", artistImageUrl);
 
         Picasso.get()
                 .load(artistImageUrl)
@@ -86,12 +80,7 @@ public class EventListFragment extends Fragment {
                                 + throwable));
 
         ToggleButton favoriteButton = rootView.findViewById(R.id.favorite_button);
-        favoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        favoriteButton.setOnClickListener(v -> {});
 
         return rootView;
 

@@ -1,19 +1,15 @@
 package panto.technoevents.recyclerview;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.Arrays;
-import java.util.List;
 
 import panto.technoevents.R;
-import panto.technoevents.apimodels.edmtrain.ArtistList;
 import panto.technoevents.apimodels.edmtrain.Events;
 
 public class EventListViewHolder extends RecyclerView.ViewHolder {
@@ -21,44 +17,50 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
     private TextView venueTextView;
     private TextView dateTextView;
     private TextView locationTextView;
-    private TextView addressTextView;
     private String venue;
     private String eventDate;
     private String eventLocation;
     private String eventAddress;
-    private String noUpcoming;
+    private String longitude;
+    private String latitude;
 
     public EventListViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        venueTextView = itemView.findViewById(R.id.venue_textView);
-        dateTextView = itemView.findViewById(R.id.date_textView);
-        locationTextView = itemView.findViewById(R.id.location_textView);
-        addressTextView = itemView.findViewById(R.id.address_textView);
+        venueTextView = itemView.findViewById(R.id.venue_name_textView);
+        dateTextView = itemView.findViewById(R.id.event_date_textView);
+        locationTextView = itemView.findViewById(R.id.event_city_state_textView);
 
     }
 
     public void onBind(final Events events) {
         venue = events.getVenue().getName();
+
         eventDate = events.getDate();
+        String year = events.getDate().substring(0, 4);
+        String monthDay = events.getDate().substring(5);
+        String date = monthDay + "-" + year;
+
         eventLocation = events.getVenue().getLocation();
         eventAddress = events.getVenue().getAddress();
-        noUpcoming = itemView.getContext().getString(R.string.no_upcoming_shows);
+        longitude = Double.toString(events.getVenue().getLongitude());
+        latitude = Double.toString(events.getVenue().getLatitude());
+
 
         venueTextView.setText(venue);
-        dateTextView.setText(eventDate);
+        dateTextView.setText(date);
         locationTextView.setText(eventLocation);
-        addressTextView.setText(eventAddress);
 
         final String artists = Arrays.deepToString(events.getArtistList().toArray());
         final String artistsTwo = artists.substring(1, artists.length() - 1);
 
-        itemView.findViewById(R.id.share_event_button)
+        itemView.findViewById(R.id.event_share_button)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         emailEventDetails();
                     }
+
 
                     private void emailEventDetails() {
                         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
@@ -74,5 +76,20 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
                         itemView.getContext().startActivity(emailIntent);
                     }
                 });
+
+        itemView.findViewById(R.id.event_map_button)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri geoCoordinates = Uri.parse("geo:"+ latitude + ","+ longitude);
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoCoordinates);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        if (mapIntent.resolveActivity(itemView.getContext().getPackageManager()) != null) {
+                            itemView.getContext().startActivity(mapIntent);
+                        }
+
+                    }
+                });
+
     }
 }
