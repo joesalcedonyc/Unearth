@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -20,25 +19,25 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.network.DjRepository;
-import panto.technoevents.recyclerview.EventListAdapter;
+import panto.technoevents.recyclerview.EventAdapter;
 
-public class EventListFragment extends Fragment {
+public class EventsFragment extends Fragment {
     private View rootView;
     private static int artistId;
     private static String artistImageUrl;
     private static String artistName;
     private RecyclerView recyclerView;
 
-    public EventListFragment() {
+    public EventsFragment() {
     }
 
-    public static EventListFragment newInstance(final DjModel djModel) {
+    public static EventsFragment newInstance(final DjModel djModel) {
 
         artistId = djModel.getId();
         artistImageUrl = djModel.getImage();
         artistName = djModel.getName();
 
-        return new EventListFragment();
+        return new EventsFragment();
 
     }
 
@@ -73,7 +72,7 @@ public class EventListFragment extends Fragment {
                                     rootView.getContext(),
                                     LinearLayoutManager.VERTICAL,
                                     false));
-                            recyclerView.setAdapter(new EventListAdapter(events));
+                            recyclerView.setAdapter(new EventAdapter(events));
                         },
 
                         throwable -> Log.d("EdmTrainRequest", "Throwable: "

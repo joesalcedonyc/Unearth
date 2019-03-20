@@ -1,6 +1,6 @@
 package panto.technoevents.apimodels.edmtrain;
 
-public class ArtistList {
+public class Artist {
     private int id;
     private String name;
 

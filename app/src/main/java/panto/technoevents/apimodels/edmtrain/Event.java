@@ -2,13 +2,13 @@ package panto.technoevents.apimodels.edmtrain;
 
 import java.util.List;
 
-public class Events {
+public class Event {
     private String link;
     private String ticketLink;
     private String name;
     private String date;
     private Venue venue;
-    private List<ArtistList> artistList;
+    private List<Artist> artistList;
 
     public String getLink() {
         return link;
@@ -30,7 +30,7 @@ public class Events {
         return venue;
     }
 
-    public List<ArtistList> getArtistList() {
+    public List<Artist> getArtistList() {
         return artistList;
     }
 

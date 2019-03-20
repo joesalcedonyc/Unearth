@@ -7,9 +7,8 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import panto.technoevents.apimodels.djs.DjResponse;
 import panto.technoevents.apimodels.edmtrain.EDMTrainResponse;
-import panto.technoevents.apimodels.edmtrain.Events;
+import panto.technoevents.apimodels.edmtrain.Event;
 import panto.technoevents.apimodels.djs.DjModel;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -54,18 +53,18 @@ public class DjRepository {
                 .subscribeOn(Schedulers.io());
     }
 
-    public Observable<List<Events>> getAllDjEvents(int djId) {
+    public Observable<List<Event>> getAllDjEvents(int djId) {
         return eventsApi.getArtistEvents(djId)
-                .map(new Function<EDMTrainResponse, List<Events>>() {
+                .map(new Function<EDMTrainResponse, List<Event>>() {
                     @Override
-                    public List<Events> apply(EDMTrainResponse response) throws Exception {
+                    public List<Event> apply(EDMTrainResponse response) throws Exception {
                         return response.getEvents();
                     }
                 })
                 .subscribeOn(Schedulers.io());
     }
 
-    public Observable<List<Events>> getRecentEvents(int djId, int count) {
+    public Observable<List<Event>> getRecentEvents(int djId, int count) {
         return getAllDjEvents(djId)
                 .flatMapIterable(items -> items)
                 .take(3)

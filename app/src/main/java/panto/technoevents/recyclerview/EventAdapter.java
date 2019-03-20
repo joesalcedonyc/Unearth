@@ -9,29 +9,29 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import panto.technoevents.R;
-import panto.technoevents.apimodels.edmtrain.Events;
+import panto.technoevents.apimodels.edmtrain.Event;
 
-public class EventListAdapter extends RecyclerView.Adapter<EventListViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
-    private List<Events> eventsList;
+    private List<Event> eventsList;
 
-    public EventListAdapter (List<Events> eventsList){
+    public EventAdapter(List<Event> eventsList){
         this.eventsList = eventsList;
     }
 
     @NonNull
     @Override
-    public EventListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_list_item_view, viewGroup, false);
 
-        return new EventListViewHolder(view);
+        return new EventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventListViewHolder eventListViewHolder, int i) {
+    public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i) {
 
-        eventListViewHolder.onBind(eventsList.get(i));
+        eventViewHolder.onBind(eventsList.get(i));
 
     }
 

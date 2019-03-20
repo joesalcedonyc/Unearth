@@ -6,9 +6,9 @@ import java.util.List;
 
 public class EDMTrainResponse {
     @SerializedName("data")
-    private List<Events> events;
+    private List<Event> events;
 
-    public List<Events> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 }

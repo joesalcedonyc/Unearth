@@ -18,7 +18,6 @@ import io.reactivex.functions.Consumer;
 import panto.technoevents.FragmentInterface;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.apimodels.edmtrain.Events;
 import panto.technoevents.recyclerview.DjAdapter;
 import panto.technoevents.network.DjRepository;
 

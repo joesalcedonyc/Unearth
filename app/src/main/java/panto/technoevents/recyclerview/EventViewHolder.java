@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import panto.technoevents.R;
-import panto.technoevents.apimodels.edmtrain.Events;
+import panto.technoevents.apimodels.edmtrain.Event;
 
-public class EventListViewHolder extends RecyclerView.ViewHolder {
+public class EventViewHolder extends RecyclerView.ViewHolder {
 
     private TextView venueTextView;
     private TextView dateTextView;
@@ -24,7 +24,7 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
     private String longitude;
     private String latitude;
 
-    public EventListViewHolder(@NonNull View itemView) {
+    public EventViewHolder(@NonNull View itemView) {
         super(itemView);
 
         venueTextView = itemView.findViewById(R.id.venue_name_textView);
@@ -33,25 +33,25 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void onBind(final Events events) {
-        venue = events.getVenue().getName();
+    public void onBind(final Event event) {
+        venue = event.getVenue().getName();
 
-        eventDate = events.getDate();
-        String year = events.getDate().substring(0, 4);
-        String monthDay = events.getDate().substring(5);
+        eventDate = event.getDate();
+        String year = event.getDate().substring(0, 4);
+        String monthDay = event.getDate().substring(5);
         String date = monthDay + "-" + year;
 
-        eventLocation = events.getVenue().getLocation();
-        eventAddress = events.getVenue().getAddress();
-        longitude = Double.toString(events.getVenue().getLongitude());
-        latitude = Double.toString(events.getVenue().getLatitude());
+        eventLocation = event.getVenue().getLocation();
+        eventAddress = event.getVenue().getAddress();
+        longitude = Double.toString(event.getVenue().getLongitude());
+        latitude = Double.toString(event.getVenue().getLatitude());
 
 
         venueTextView.setText(venue);
         dateTextView.setText(date);
         locationTextView.setText(eventLocation);
 
-        final String artists = Arrays.deepToString(events.getArtistList().toArray());
+        final String artists = Arrays.deepToString(event.getArtistList().toArray());
         final String artistsTwo = artists.substring(1, artists.length() - 1);
 
         itemView.findViewById(R.id.event_share_button)

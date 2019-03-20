@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import panto.technoevents.FragmentInterface;
 import panto.technoevents.R;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
 
     public void switchToEventListFrag() {
 
-//        EventListFragment eventListFragment = EventListFragment.newInstance();
+//        EventsFragment eventListFragment = EventsFragment.newInstance();
 //        Bundle bundle = new Bundle();
 //        addArgsToBundle();
 //        eventListFragment.setArguments();
@@ -57,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
 
     @Override
     public void fragmentNavigation(DjModel djModel) {
-        EventListFragment eventListFragment = EventListFragment.newInstance(djModel);
-        toFragment(eventListFragment);
+        EventsFragment eventsFragment = EventsFragment.newInstance(djModel);
+        toFragment(eventsFragment);
 
     }
 
