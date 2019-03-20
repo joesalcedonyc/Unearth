@@ -1,8 +1,6 @@
 package panto.technoevents.UI;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,20 +9,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.apimodels.edmtrain.Events;
 import panto.technoevents.network.DjRepository;
 import panto.technoevents.recyclerview.EventListAdapter;
 
@@ -34,6 +28,7 @@ public class EventListFragment extends Fragment {
     private static String artistImageUrl;
     private static String artistName;
     private RecyclerView recyclerView;
+    int i = 0;
 
 
     public EventListFragment() {
@@ -90,6 +85,15 @@ public class EventListFragment extends Fragment {
                         throwable -> Log.d("EdmTrainRequest", "Throwable: "
                                 + throwable));
 
+        ToggleButton favoriteButton = rootView.findViewById(R.id.favorite_button);
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return rootView;
+
     }
 }

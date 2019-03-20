@@ -15,7 +15,34 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/splashtwo" />
+        tools:src="@tools:sample/avatars"/>
+
+    <FrameLayout
+        app:layout_constraintTop_toBottomOf="@id/event_list_artist_ImageView"
+        app:layout_constraintBottom_toTopOf="@+id/event_list_artist_name_textView"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/favorite_imageView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:src="@drawable/ic_favorite_outline"/>-->
+
+        <ToggleButton
+            android:id="@+id/favorite_button"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_favorite"
+            android:checked="false"
+            android:text=""
+            android:textOff=""
+            android:textOn="" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/event_list_artist_name_textView"
@@ -36,7 +63,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_list_artist_name_textView">
+        app:layout_constraintTop_toBottomOf="@+id/event_list_artist_name_textView"
+        tools:listitem="@layout/event_list_item_view">
 
     </android.support.v7.widget.RecyclerView>
 
