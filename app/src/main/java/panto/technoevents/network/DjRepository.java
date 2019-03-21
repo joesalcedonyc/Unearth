@@ -17,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DjRepository {
     private static DjRepository instance;
     private final DjApi djApi;
+    private static Retrofit djRetrofitInstance;
+    private static Retrofit eventsRetrofitInstance;
     private final EventsApi eventsApi;
 
     private DjRepository(@NonNull DjApi djApi, @NonNull EventsApi eventsApi) {
@@ -29,22 +31,34 @@ public class DjRepository {
             Retrofit djRetrofit = buildRetrofit();
             DjApi djApi = djRetrofit.create(DjApi.class);
 
-            Retrofit eventsRetrofit = EventRetrofitProvider.getInstance();
+            Retrofit eventsRetrofit = buildEventsRetrofit();
             EventsApi eventsApi = eventsRetrofit.create(EventsApi.class);
 
             instance = new DjRepository(djApi, eventsApi);
         }
-
         return instance;
     }
 
-    // TODO make retrofit instance a singleton
     private static Retrofit buildRetrofit() {
-        return new Retrofit.Builder()
-                .baseUrl("https://gist.githubusercontent.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+        if (djRetrofitInstance == null) {
+            djRetrofitInstance = new Retrofit.Builder()
+                    .baseUrl("https://gist.githubusercontent.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+        }
+        return djRetrofitInstance;
+    }
+
+    public static Retrofit buildEventsRetrofit() {
+        if (eventsRetrofitInstance == null) {
+            eventsRetrofitInstance = new Retrofit.Builder()
+                    .baseUrl("https://edmtrain.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+        }
+        return eventsRetrofitInstance;
     }
 
     public Observable<List<DjModel>> getAllDjs() {

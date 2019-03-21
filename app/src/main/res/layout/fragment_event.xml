@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".UI.EventsFragment">
 
     <ImageView
@@ -33,8 +34,8 @@
 
         <ToggleButton
             android:id="@+id/favorite_button"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/button_favorite"
             android:checked="false"
@@ -65,7 +66,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_list_artist_name_textView"
-        tools:listitem="@layout/event_list_item_view">
+        tools:listitem="@layout/event_item_view">
 
     </android.support.v7.widget.RecyclerView>
 

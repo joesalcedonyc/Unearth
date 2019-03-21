@@ -2,9 +2,12 @@ package panto.technoevents.UI;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,12 +44,13 @@ public class EventsFragment extends Fragment {
 
     }
 
+
     @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_event, container, false);
         recyclerView = rootView.findViewById(R.id.event_list_recyclerView);
 
         ImageView eventListArtistImageView = rootView.findViewById(R.id.event_list_artist_ImageView);
@@ -62,11 +66,9 @@ public class EventsFragment extends Fragment {
                 .getAllDjEvents(artistId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(events -> {
-                            Log.d("EdmTrainRequest", "Response: " +
-                                    events.get(0)
-                                            .getVenue()
-                                            .getName());
-
+                            Log.d("EdmTrainRequest", "Response: " + events.get(0)
+                                    .getVenue()
+                                    .getName());
 
                             recyclerView.setLayoutManager(new LinearLayoutManager(
                                     rootView.getContext(),
@@ -75,8 +77,7 @@ public class EventsFragment extends Fragment {
                             recyclerView.setAdapter(new EventAdapter(events));
                         },
 
-                        throwable -> Log.d("EdmTrainRequest", "Throwable: "
-                                + throwable));
+                        throwable -> Log.d("EdmTrainRequest", "Throwable: " + throwable));
 
         ToggleButton favoriteButton = rootView.findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {});

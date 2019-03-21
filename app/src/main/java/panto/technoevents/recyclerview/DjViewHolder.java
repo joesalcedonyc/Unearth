@@ -32,7 +32,7 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final DjModel djModel) {
         artistNameTextView.setText(djModel.getName());
         Picasso.get().load(djModel.getImage())
-                .resize(200, 180)
+                .resize(220, 180)
                 .into(artistImageView);
 
         itemView.findViewById(R.id.dj_cardView)

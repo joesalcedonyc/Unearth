@@ -27,7 +27,6 @@ public class DjsFragment extends Fragment {
     private RecyclerView recyclerView;
     private FragmentInterface fragmentInterface;
 
-
     public static DjsFragment newInstance() {
         return new DjsFragment();
     }
@@ -39,7 +38,7 @@ public class DjsFragment extends Fragment {
         if (context instanceof FragmentInterface) {
           fragmentInterface = (FragmentInterface) context;
         } else {
-            throw new RuntimeException(context.toString() + "must be instance of MainActivity");
+            throw new RuntimeException(context.toString() + "Must be instance of FragmentInterface");
         }
     }
 
@@ -47,7 +46,7 @@ public class DjsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_techno_djs, container, false);
+        rootView = inflater.inflate(R.layout.fragment_djs, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
         DjRepository.getInstance()

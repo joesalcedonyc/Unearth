@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/event_date_textView"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -66,7 +66,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <ImageView
-                android:id="@+id/event_share_button"
+                android:id="@+id/event_share_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -77,7 +77,7 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <ImageView
-                android:id="@+id/event_map_button"
+                android:id="@+id/event_map_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -85,7 +85,7 @@
                 android:src="@drawable/ic_map_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@id/event_share_button" />
+                app:layout_constraintRight_toRightOf="@id/event_share_image" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

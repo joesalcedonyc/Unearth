@@ -12,10 +12,6 @@ import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 
 public class MainActivity extends AppCompatActivity implements FragmentInterface {
-    public static final String KEY_VENUE = "venue";
-    public static final String KEY_DATE = "date";
-    public static final String KEY_LOCATION = "location";
-    public static final String KEY_ADDRESS = "address";
 
     @SuppressLint("CheckResult")
     @Override
@@ -28,23 +24,11 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
 
     }
 
-    public void switchToEventListFrag() {
+    @Override
+    public void fragmentNavigation(DjModel djModel) {
+        EventsFragment eventsFragment = EventsFragment.newInstance(djModel);
+        toFragment(eventsFragment);
 
-//        EventsFragment eventListFragment = EventsFragment.newInstance();
-//        Bundle bundle = new Bundle();
-//        addArgsToBundle();
-//        eventListFragment.setArguments();
-
-//        toFragment(eventListFragment);
-
-
-    }
-
-    private void addArgsToBundle(Bundle bundle, String venue, String date, String location, String address) {
-        bundle.putString(KEY_VENUE, venue);
-        bundle.putString(KEY_DATE, date);
-        bundle.putString(KEY_LOCATION, location);
-        bundle.putString(KEY_ADDRESS, address);
     }
 
     private void toFragment(Fragment fragment) {
@@ -52,13 +36,6 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_container, fragment).addToBackStack(null);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void fragmentNavigation(DjModel djModel) {
-        EventsFragment eventsFragment = EventsFragment.newInstance(djModel);
-        toFragment(eventsFragment);
-
     }
 
 }
