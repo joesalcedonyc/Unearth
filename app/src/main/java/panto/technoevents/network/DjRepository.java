@@ -68,7 +68,7 @@ public class DjRepository {
                 .subscribeOn(Schedulers.io());
     }
 
-    public Observable<List<Event>> getAllDjEvents(int djId) {
+    public Single<List<Event>> getAllDjEvents(int djId) {
         return eventsApi.getArtistEvents(djId)
                 .map(new Function<EDMTrainResponse, List<Event>>() {
                     @Override
@@ -79,11 +79,12 @@ public class DjRepository {
                 .subscribeOn(Schedulers.io());
     }
 
-    public Observable<List<Event>> getRecentEvents(int djId, int count) {
-        return getAllDjEvents(djId)
-                .flatMapIterable(items -> items)
-                .take(3)
-                .toList()
-                .toObservable();
-    }
+//    public Single<List<Event>> getRecentEvents(int djId, int count) {
+//        return getAllDjEvents(djId)
+//                .flatMapIterable(items -> items)
+//                .take(3)
+//                .toList()
+//                .toObservable();
+//    }
+
 }

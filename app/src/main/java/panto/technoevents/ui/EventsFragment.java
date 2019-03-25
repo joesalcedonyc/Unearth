@@ -1,7 +1,7 @@
 package panto.technoevents.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +16,7 @@ import android.widget.ToggleButton;
 import com.squareup.picasso.Picasso;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.network.DjRepository;
@@ -27,6 +28,7 @@ public class EventsFragment extends Fragment {
     private static String artistImageUrl;
     private static String artistName;
     private RecyclerView recyclerView;
+    private final CompositeDisposable disposable = new CompositeDisposable();
 
     public EventsFragment() {
     }
@@ -41,10 +43,8 @@ public class EventsFragment extends Fragment {
 
     }
 
-
-    @SuppressLint("CheckResult")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_event, container, false);
@@ -59,7 +59,7 @@ public class EventsFragment extends Fragment {
 
         eventListArtistNameTextView.setText(artistName);
 
-        DjRepository.getInstance()
+        disposable.add(DjRepository.getInstance()
                 .getAllDjEvents(artistId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(events -> {
@@ -67,19 +67,26 @@ public class EventsFragment extends Fragment {
                                     .getVenue()
                                     .getName());
 
-                            recyclerView.setLayoutManager(new LinearLayoutManager(
-                                    rootView.getContext(),
-                                    LinearLayoutManager.VERTICAL,
-                                    false));
+                            recyclerView.setLayoutManager(
+                                    new LinearLayoutManager(
+                                            rootView.getContext(),
+                                            LinearLayoutManager.VERTICAL,
+                                            false));
                             recyclerView.setAdapter(new EventAdapter(events));
                         },
 
-                        throwable -> Log.d("EdmTrainRequest", "Throwable: " + throwable));
+                        throwable -> Log.d("EdmTrainRequest", "Throwable: " + throwable)));
 
         ToggleButton favoriteButton = rootView.findViewById(R.id.favorite_button);
-        favoriteButton.setOnClickListener(v -> {});
+        favoriteButton.setOnClickListener(v -> {
+        });
 
         return rootView;
+    }
 
+    @Override
+    public void onStop() {
+        disposable.clear();
+        super.onStop();
     }
 }
