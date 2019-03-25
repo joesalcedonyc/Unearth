@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import panto.technoevents.apimodels.edmtrain.EDMTrainResponse;
@@ -21,11 +22,11 @@ public class DjRepository {
     private static Retrofit eventsRetrofitInstance;
     private final EventsApi eventsApi;
 
+
     private DjRepository(@NonNull DjApi djApi, @NonNull EventsApi eventsApi) {
         this.djApi = djApi;
         this.eventsApi = eventsApi;
     }
-
     public static DjRepository getInstance() {
         if (instance == null) {
             Retrofit djRetrofit = buildRetrofit();
@@ -61,7 +62,7 @@ public class DjRepository {
         return eventsRetrofitInstance;
     }
 
-    public Observable<List<DjModel>> getAllDjs() {
+    public Single<List<DjModel>> getAllDjs() {
         return djApi.getDjs()
                 .map(response -> response.getDjs())
                 .subscribeOn(Schedulers.io());

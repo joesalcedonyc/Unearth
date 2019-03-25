@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import panto.technoevents.FragmentInterface;
+import panto.technoevents.ui.onDjSelectedListener;
 import panto.technoevents.R;
 
 import panto.technoevents.apimodels.djs.DjModel;
@@ -17,15 +17,15 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
 
     private TextView artistNameTextView;
     private ImageView artistImageView;
-    private FragmentInterface fragmentInterface;
+    private onDjSelectedListener onDjSelectedListener;
 
 
-    public DjViewHolder(@NonNull View itemView, FragmentInterface fragmentInterface) {
+    public DjViewHolder(@NonNull View itemView, onDjSelectedListener onDjSelectedListener) {
         super(itemView);
 
         artistNameTextView = itemView.findViewById(R.id.artist_name_textView);
         artistImageView = itemView.findViewById(R.id.artist_image);
-        this.fragmentInterface = fragmentInterface;
+        this.onDjSelectedListener = onDjSelectedListener;
 
     }
 
@@ -39,7 +39,7 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragmentInterface.fragmentNavigation(djModel);
+                        onDjSelectedListener.fragmentNavigation(djModel);
                     }
                 });
 
