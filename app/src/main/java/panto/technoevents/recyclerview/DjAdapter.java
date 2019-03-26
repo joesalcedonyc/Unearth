@@ -1,7 +1,5 @@
 package panto.technoevents.recyclerview;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +8,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import panto.technoevents.ui.onDjSelectedListener;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.ui.onDjSelectedListener;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     private onDjSelectedListener onDjSelectedListener;

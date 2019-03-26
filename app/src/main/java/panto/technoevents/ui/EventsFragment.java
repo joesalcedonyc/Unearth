@@ -1,10 +1,6 @@
 package panto.technoevents.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +11,18 @@ import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.network.DjRepository;
 import panto.technoevents.recyclerview.EventAdapter;
+
+import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class EventsFragment extends Fragment {
     private View rootView;
@@ -70,7 +72,7 @@ public class EventsFragment extends Fragment {
                             recyclerView.setLayoutManager(
                                     new LinearLayoutManager(
                                             rootView.getContext(),
-                                            LinearLayoutManager.VERTICAL,
+                                            VERTICAL,
                                             false));
                             recyclerView.setAdapter(new EventAdapter(events));
                         },

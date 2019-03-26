@@ -1,16 +1,12 @@
 package panto.technoevents.network;
 
-import android.support.annotation.NonNull;
-
 import java.util.List;
 
-import io.reactivex.Observable;
+import androidx.annotation.NonNull;
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import panto.technoevents.apimodels.edmtrain.EDMTrainResponse;
-import panto.technoevents.apimodels.edmtrain.Event;
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.apimodels.edmtrain.Event;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

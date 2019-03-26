@@ -1,17 +1,16 @@
 package panto.technoevents.recyclerview;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import panto.technoevents.ui.onDjSelectedListener;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
-
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.ui.onDjSelectedListener;
 
 public class DjViewHolder extends RecyclerView.ViewHolder {
 

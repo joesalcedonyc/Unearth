@@ -2,30 +2,24 @@ package panto.technoevents.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
-import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.recyclerview.DjAdapter;
 import panto.technoevents.viewmodel.DjsFragmentViewModel;
 
-public class DjsFragment extends Fragment {
+import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
-    private View rootView;
+public class DjsFragment extends Fragment {
     private RecyclerView recyclerView;
     private DjAdapter adapter;
     private onDjSelectedListener onDjSelectedListener;
@@ -40,16 +34,12 @@ public class DjsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new DjAdapter(onDjSelectedListener);
+
         djsFragmentViewModel = ViewModelProviders.of(this).get(DjsFragmentViewModel.class);
 
-        djsFragmentViewModel.loadDjs();
-
-        djsFragmentViewModel.djs.observe(this, new Observer<List<DjModel>>() {
-            @Override
-            public void onChanged(List<DjModel> djModels) {
-                adapter.setData(djModels);
-            }
-        });
+        if (savedInstanceState == null) {
+            djsFragmentViewModel.loadDjs();
+        }
     }
 
     @Override
@@ -61,13 +51,12 @@ public class DjsFragment extends Fragment {
         } else {
             throw new RuntimeException(context.toString() + "Must be instance of onDjSelectedListener");
         }
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return rootView;
+        return inflater.inflate(R.layout.fragment_djs, container, false);
     }
 
     @Override
@@ -76,11 +65,13 @@ public class DjsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(),
-                        LinearLayoutManager.VERTICAL,
+                        VERTICAL,
                         false
                 ));
 
         recyclerView.setAdapter(adapter);
+
+        djsFragmentViewModel.djs.observe(this, djModels -> adapter.setData(djModels));
     }
 
     @Override
