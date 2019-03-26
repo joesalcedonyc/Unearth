@@ -70,12 +70,7 @@ public class DjRepository {
 
     public Single<List<Event>> getAllDjEvents(int djId) {
         return eventsApi.getArtistEvents(djId)
-                .map(new Function<EDMTrainResponse, List<Event>>() {
-                    @Override
-                    public List<Event> apply(EDMTrainResponse response) throws Exception {
-                        return response.getEvents();
-                    }
-                })
+                .map(response -> response.getEvents())
                 .subscribeOn(Schedulers.io());
     }
 
