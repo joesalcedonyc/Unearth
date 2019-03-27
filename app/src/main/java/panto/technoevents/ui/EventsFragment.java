@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.recyclerview.EventAdapter;
-import panto.technoevents.viewmodel.DjsFragmentViewModel;
+import panto.technoevents.viewmodel.FragmentsViewModel;
 
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
@@ -27,7 +27,7 @@ public class EventsFragment extends Fragment {
     private static String artistImageUrl;
     private static String artistName;
     private EventAdapter eventAdapter;
-    private DjsFragmentViewModel djsFragmentViewModel;
+    private FragmentsViewModel fragmentsViewModel;
     private DjModel djModel;
 
     public EventsFragment() {
@@ -50,11 +50,11 @@ public class EventsFragment extends Fragment {
         }
 
         eventAdapter = new EventAdapter();
-        djsFragmentViewModel = ViewModelProviders.of(this).get(DjsFragmentViewModel.class);
+        fragmentsViewModel = ViewModelProviders.of(this).get(FragmentsViewModel.class);
         artistImageUrl = djModel.getImage();
         artistName = djModel.getName();
 
-        djsFragmentViewModel.loadEvents(djModel.getId());
+        fragmentsViewModel.loadEvents(djModel.getId());
 
     }
 
@@ -81,7 +81,7 @@ public class EventsFragment extends Fragment {
 
         eventListArtistNameTextView.setText(artistName);
 
-        djsFragmentViewModel.djEvents.observe(this, events -> eventAdapter.setData(events));
+        fragmentsViewModel.djEvents.observe(this, events -> eventAdapter.setData(events));
 
         ToggleButton favoriteButton = view.findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {

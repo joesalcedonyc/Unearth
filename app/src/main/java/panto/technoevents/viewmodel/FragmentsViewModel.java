@@ -10,12 +10,12 @@ import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.edmtrain.Event;
 import panto.technoevents.network.DjRepository;
 
-public class DjsFragmentViewModel extends ViewModel {
+public class FragmentsViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
     public MutableLiveData<List<DjModel>> djs;
     public MutableLiveData<List<Event>> djEvents;
 
-    public DjsFragmentViewModel() {
+    public FragmentsViewModel() {
         djs = new MutableLiveData<>();
         djEvents = new MutableLiveData<>();
     }

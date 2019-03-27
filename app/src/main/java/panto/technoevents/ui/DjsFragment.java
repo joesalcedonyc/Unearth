@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
 import panto.technoevents.recyclerview.DjAdapter;
-import panto.technoevents.viewmodel.DjsFragmentViewModel;
+import panto.technoevents.viewmodel.FragmentsViewModel;
 
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class DjsFragment extends Fragment {
     private DjAdapter adapter;
     private OnDJSelectedListener onDjSelectedListener;
-    private DjsFragmentViewModel djsFragmentViewModel;
+    private FragmentsViewModel fragmentsViewModel;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
     public static DjsFragment newInstance() {
@@ -45,8 +45,8 @@ public class DjsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         adapter = new DjAdapter(onDjSelectedListener);
 
-        djsFragmentViewModel = ViewModelProviders.of(this).get(DjsFragmentViewModel.class);
-        djsFragmentViewModel.loadDjs();
+        fragmentsViewModel = ViewModelProviders.of(this).get(FragmentsViewModel.class);
+        fragmentsViewModel.loadDjs();
 
     }
 
@@ -64,7 +64,7 @@ public class DjsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
-        djsFragmentViewModel.djs.observe(this, djModels -> adapter.setData(djModels));
+        fragmentsViewModel.djs.observe(this, djModels -> adapter.setData(djModels));
     }
 
     @Override
