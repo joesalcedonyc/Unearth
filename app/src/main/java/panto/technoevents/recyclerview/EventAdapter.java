@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,9 @@ import panto.technoevents.apimodels.edmtrain.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
-    private List<Event> eventsList;
+    private List<Event> eventsList = new ArrayList<>();
 
-    public EventAdapter(List<Event> eventsList){
-        this.eventsList = eventsList;
+    public EventAdapter() {
     }
 
     @NonNull
@@ -38,5 +38,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     @Override
     public int getItemCount() {
         return eventsList.size();
+    }
+
+    public void setData(List<Event> events) {
+        eventsList = events;
+        notifyDataSetChanged();
     }
 }

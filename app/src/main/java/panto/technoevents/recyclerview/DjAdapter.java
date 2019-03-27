@@ -1,6 +1,5 @@
 package panto.technoevents.recyclerview;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.onDjSelectedListener;
+import panto.technoevents.ui.OnDJSelectedListener;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
-    private onDjSelectedListener onDjSelectedListener;
+    private OnDJSelectedListener onDjSelectedListener;
 
     List<DjModel> djList = new ArrayList<>();
 
-    public DjAdapter(onDjSelectedListener onDjSelectedListener) {
+    public DjAdapter(OnDJSelectedListener onDjSelectedListener) {
 
         this.onDjSelectedListener = onDjSelectedListener;
     }
@@ -28,13 +27,12 @@ public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     @Override
     public DjViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dj_item_view, viewGroup, false);
-        return new DjViewHolder(view, onDjSelectedListener);
+        return new DjViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DjViewHolder djViewHolder, int i) {
-        djViewHolder.onBind(djList.get(i));
-        Log.d("onBindAdapter", "AdapteronBind");
+        djViewHolder.onBind(onDjSelectedListener, djList.get(i));
     }
 
     @Override

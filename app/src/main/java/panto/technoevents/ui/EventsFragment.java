@@ -1,7 +1,6 @@
 package panto.technoevents.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,48 +11,69 @@ import android.widget.ToggleButton;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.network.DjRepository;
 import panto.technoevents.recyclerview.EventAdapter;
+import panto.technoevents.viewmodel.DjsFragmentViewModel;
 
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class EventsFragment extends Fragment {
-    private View rootView;
-    private static int artistId;
     private static String artistImageUrl;
     private static String artistName;
-    private RecyclerView recyclerView;
-    private final CompositeDisposable disposable = new CompositeDisposable();
+    private EventAdapter eventAdapter;
+    private DjsFragmentViewModel djsFragmentViewModel;
+    private DjModel djModel;
 
     public EventsFragment() {
     }
 
-    public static EventsFragment newInstance(final DjModel djModel) {
+    public static EventsFragment newInstance(DjModel djModel) {
+        Bundle bundle = new Bundle();
+        EventsFragment fragment = new EventsFragment();
+        bundle.putParcelable("DJ", djModel);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
-        artistId = djModel.getId();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            djModel = getArguments().getParcelable("DJ");
+        }
+
+        eventAdapter = new EventAdapter();
+        djsFragmentViewModel = ViewModelProviders.of(this).get(DjsFragmentViewModel.class);
         artistImageUrl = djModel.getImage();
         artistName = djModel.getName();
 
-        return new EventsFragment();
+        djsFragmentViewModel.loadEvents(djModel.getId());
 
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_event, container, false);
+    }
 
-        rootView = inflater.inflate(R.layout.fragment_event, container, false);
-        recyclerView = rootView.findViewById(R.id.event_list_recyclerView);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        ImageView eventListArtistImageView = rootView.findViewById(R.id.event_list_artist_ImageView);
-        TextView eventListArtistNameTextView = rootView.findViewById(R.id.event_list_artist_name_textView);
+        ImageView eventListArtistImageView = view.findViewById(R.id.event_list_artist_ImageView);
+        TextView eventListArtistNameTextView = view.findViewById(R.id.event_list_artist_name_textView);
+        RecyclerView recyclerView = view.findViewById(R.id.event_list_recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), VERTICAL, false));
+        recyclerView.setAdapter(eventAdapter);
 
         Picasso.get()
                 .load(artistImageUrl)
@@ -61,34 +81,10 @@ public class EventsFragment extends Fragment {
 
         eventListArtistNameTextView.setText(artistName);
 
-        disposable.add(DjRepository.getInstance()
-                .getAllDjEvents(artistId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(events -> {
-                            Log.d("EdmTrainRequest", "Response: " + events.get(0)
-                                    .getVenue()
-                                    .getName());
+        djsFragmentViewModel.djEvents.observe(this, events -> eventAdapter.setData(events));
 
-                            recyclerView.setLayoutManager(
-                                    new LinearLayoutManager(
-                                            rootView.getContext(),
-                                            VERTICAL,
-                                            false));
-                            recyclerView.setAdapter(new EventAdapter(events));
-                        },
-
-                        throwable -> Log.d("EdmTrainRequest", "Throwable: " + throwable)));
-
-        ToggleButton favoriteButton = rootView.findViewById(R.id.favorite_button);
+        ToggleButton favoriteButton = view.findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {
         });
-
-        return rootView;
-    }
-
-    @Override
-    public void onStop() {
-        disposable.clear();
-        super.onStop();
     }
 }

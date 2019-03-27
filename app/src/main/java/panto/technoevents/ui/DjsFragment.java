@@ -20,9 +20,8 @@ import panto.technoevents.viewmodel.DjsFragmentViewModel;
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class DjsFragment extends Fragment {
-    private RecyclerView recyclerView;
     private DjAdapter adapter;
-    private onDjSelectedListener onDjSelectedListener;
+    private OnDJSelectedListener onDjSelectedListener;
     private DjsFragmentViewModel djsFragmentViewModel;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
@@ -31,26 +30,24 @@ public class DjsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof OnDJSelectedListener) {
+            onDjSelectedListener = (OnDJSelectedListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "Must be instance of OnDJSelectedListener");
+        }
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new DjAdapter(onDjSelectedListener);
 
         djsFragmentViewModel = ViewModelProviders.of(this).get(DjsFragmentViewModel.class);
+        djsFragmentViewModel.loadDjs();
 
-        if (savedInstanceState == null) {
-            djsFragmentViewModel.loadDjs();
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (context instanceof onDjSelectedListener) {
-            onDjSelectedListener = (onDjSelectedListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + "Must be instance of onDjSelectedListener");
-        }
     }
 
     @Override
@@ -62,13 +59,9 @@ public class DjsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(getContext(),
-                        VERTICAL,
-                        false
-                ));
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         djsFragmentViewModel.djs.observe(this, djModels -> adapter.setData(djModels));

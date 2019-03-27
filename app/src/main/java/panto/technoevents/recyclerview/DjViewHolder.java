@@ -10,37 +10,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.onDjSelectedListener;
+import panto.technoevents.ui.OnDJSelectedListener;
 
 public class DjViewHolder extends RecyclerView.ViewHolder {
 
     private TextView artistNameTextView;
     private ImageView artistImageView;
-    private onDjSelectedListener onDjSelectedListener;
 
-
-    public DjViewHolder(@NonNull View itemView, onDjSelectedListener onDjSelectedListener) {
+    public DjViewHolder(@NonNull View itemView) {
         super(itemView);
 
         artistNameTextView = itemView.findViewById(R.id.artist_name_textView);
         artistImageView = itemView.findViewById(R.id.artist_image);
-        this.onDjSelectedListener = onDjSelectedListener;
 
     }
 
-    public void onBind(final DjModel djModel) {
+    public void onBind(OnDJSelectedListener onDJSelectedListener, final DjModel djModel) {
         artistNameTextView.setText(djModel.getName());
         Picasso.get().load(djModel.getImage())
                 .resize(220, 180)
                 .into(artistImageView);
 
         itemView.findViewById(R.id.dj_cardView)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onDjSelectedListener.fragmentNavigation(djModel);
-                    }
-                });
+                .setOnClickListener(v -> onDJSelectedListener.openEventsFragment(djModel));
 
     }
 }
