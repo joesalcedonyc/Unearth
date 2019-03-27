@@ -49,7 +49,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         final ImageView shareImageView = itemView.findViewById(R.id.event_share_image);
         final ImageView mapImageView = itemView.findViewById(R.id.event_map_image);
 
-        shareImageView.setOnClickListener(v -> emailEventDetails());
+        shareImageView.setOnClickListener(v -> EventViewHolder.this.emailEventDetails());
 
         mapImageView.setOnClickListener(v -> {
             Uri geoCoordinates = Uri.parse("geo:" + latitude + "," + longitude);
@@ -57,9 +57,8 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
 
             mapIntent.setPackage("com.google.android.apps.maps");
 
-            if (mapIntent.resolveActivity(itemView.getContext().getPackageManager()) != null) {
-                itemView.getContext().startActivity(mapIntent);
-            }
+            itemView.getContext().startActivity(mapIntent);
+
         });
     }
 

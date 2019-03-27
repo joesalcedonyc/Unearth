@@ -84,7 +84,6 @@ public class EventsFragment extends Fragment {
         fragmentsViewModel.djEvents.observe(this, events -> eventAdapter.setData(events));
 
         ToggleButton favoriteButton = view.findViewById(R.id.favorite_button);
-        favoriteButton.setOnClickListener(v -> {
-        });
+        favoriteButton.setOnClickListener(v -> {});
     }
 }
