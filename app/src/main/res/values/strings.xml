@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">TechnoEvents</string>
     <string name="press_shot_of_dj">press shot of DJ</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_upcoming_shows">No Upcoming Shows Scheduled</string>
     <string name="event_name_tba">""</string>
+    <string name="search_title">DJs</string>
 </resources>
