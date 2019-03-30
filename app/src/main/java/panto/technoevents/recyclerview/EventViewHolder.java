@@ -18,7 +18,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private TextView venueTextView;
     private TextView dateTextView;
     private TextView locationTextView;
-    private String Lineup;
+    private String lineup;
     private String venueName;
     private String eventDate;
     private String eventLocation;
@@ -26,17 +26,20 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private String longitude;
     private String latitude;
 
+    private  TextView lineupTextView;
+
     public EventViewHolder(@NonNull View itemView) {
         super(itemView);
 
         findTextViews(itemView);
+        lineupTextView = itemView.findViewById(R.id.lineup_TextView);
     }
 
     public void onBind(final Event event) {
 
         venueName = event.getVenue().getName();
-        assignEventDateVars(event);
-        assignEventLocationVars(event);
+        assignEventDateVariables(event);
+        assignEventLocationVariables(event);
 
         setEventInfoTextViews();
 
@@ -44,7 +47,9 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         latitude = Double.toString(event.getVenue().getLatitude());
 
         String artistNamesToString = Arrays.deepToString(event.getArtistList().toArray());
-        Lineup = artistNamesToString.substring(1, artistNamesToString.length() - 1);
+        lineup = artistNamesToString.substring(1, artistNamesToString.length() - 1);
+
+        lineupTextView.setText(lineup);
 
         final ImageView shareImageView = itemView.findViewById(R.id.event_share_image);
         final ImageView mapImageView = itemView.findViewById(R.id.event_map_image);
@@ -74,13 +79,13 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         locationTextView.setText(eventLocation);
     }
 
-    private void assignEventDateVars(Event event) {
+    private void assignEventDateVariables(Event event) {
         String eventYear = event.getDate().substring(0, 4);
         String eventMonthDay = event.getDate().substring(5);
         eventDate = eventMonthDay + "-" + eventYear;
     }
 
-    private void assignEventLocationVars(Event event) {
+    private void assignEventLocationVariables(Event event) {
         eventLocation = event.getVenue().getLocation();
         eventAddress = event.getVenue().getAddress();
     }
@@ -91,7 +96,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "We out?");
         emailIntent.putExtra(Intent.EXTRA_TEXT,
                 eventDate + "\n\n" +
-                        Lineup + " @\n\n" +
+                        lineup + " @\n\n" +
                         venueName + "\n" +
                         eventLocation + "\n" +
                         eventAddress + "\n"

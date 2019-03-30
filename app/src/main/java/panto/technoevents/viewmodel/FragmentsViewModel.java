@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.edmtrain.Event;
 import panto.technoevents.network.DjRepository;
@@ -24,7 +25,12 @@ public class FragmentsViewModel extends ViewModel {
         disposable.add(DjRepository.getInstance()
                 .getAllDjs()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(djModels -> djs.setValue(djModels)));
+                .subscribe(new Consumer<List<DjModel>>() {
+                    @Override
+                    public void accept(List<DjModel> djModels) throws Exception {
+                        djs.setValue(djModels);
+                    }
+                }));
     }
 
     public void loadEvents(int id) {
