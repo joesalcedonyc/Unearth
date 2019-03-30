@@ -20,9 +20,8 @@ public class MainActivity extends AppCompatActivity implements OnDJSelectedListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.options_menu, menu);
         return true;
     }
 

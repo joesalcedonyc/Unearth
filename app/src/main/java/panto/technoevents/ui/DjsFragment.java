@@ -5,23 +5,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
+import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.recyclerview.DjAdapter;
 import panto.technoevents.viewmodel.FragmentsViewModel;
 
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
-public class DjsFragment extends Fragment {
+public class DjsFragment extends Fragment{
     private DjAdapter adapter;
     private OnDJSelectedListener onDjSelectedListener;
     private FragmentsViewModel fragmentsViewModel;
@@ -66,7 +72,12 @@ public class DjsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
-        fragmentsViewModel.djs.observe(this, djModels -> adapter.setData(djModels));
+        fragmentsViewModel.djs.observe(this, new Observer<List<DjModel>>() {
+            @Override
+            public void onChanged(List<DjModel> djModels) {
+                adapter.setData(djModels);
+            }
+        });
     }
 
     @Override
