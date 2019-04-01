@@ -57,7 +57,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         shareImageView.setOnClickListener(v -> EventViewHolder.this.emailEventDetails());
 
         mapImageView.setOnClickListener(v -> {
-            Uri geoCoordinates = Uri.parse("geo:" + latitude + "," + longitude);
+            Uri geoCoordinates = Uri.parse("geo:" + latitude + "," + longitude + "?z=15&q=" + eventAddress);
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoCoordinates);
 
             mapIntent.setPackage("com.google.android.apps.maps");
