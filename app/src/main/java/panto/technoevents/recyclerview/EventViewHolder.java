@@ -18,6 +18,9 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private TextView venueTextView;
     private TextView dateTextView;
     private TextView locationTextView;
+    private ImageView shareImageView;
+    private ImageView mapImageView;
+    private ImageView navigationImageView;
     private String lineup;
     private String venueName;
     private String eventDate;
@@ -26,13 +29,13 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private String longitude;
     private String latitude;
 
-    private  TextView lineupTextView;
+    private TextView lineupTextView;
 
     public EventViewHolder(@NonNull View itemView) {
         super(itemView);
 
         findTextViews(itemView);
-        lineupTextView = itemView.findViewById(R.id.lineup_TextView);
+        findImageViews(itemView);
     }
 
     public void onBind(final Event event) {
@@ -51,32 +54,45 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
 
         lineupTextView.setText(lineup);
 
-        final ImageView shareImageView = itemView.findViewById(R.id.event_share_image);
-        final ImageView mapImageView = itemView.findViewById(R.id.event_map_image);
+        Intent mapIntent = getMapIntent();
+        Intent navIntent = getNavigationIntent();
 
-        shareImageView.setOnClickListener(v -> EventViewHolder.this.emailEventDetails());
+        shareImageView.setOnClickListener(v -> emailEventDetails());
+        mapImageView.setOnClickListener(v -> itemView.getContext().startActivity(mapIntent));
+        navigationImageView.setOnClickListener(v -> itemView.getContext().startActivity(navIntent));
+    }
 
-        mapImageView.setOnClickListener(v -> {
-            Uri geoCoordinates = Uri.parse("geo:" + latitude + "," + longitude + "?z=15&q=" + eventAddress);
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoCoordinates);
+    private Intent getNavigationIntent() {
+        Uri parseAddress = Uri.parse("google.navigation:q=" + eventAddress);
+        Intent navIntent = new Intent(Intent.ACTION_VIEW, parseAddress);
+        navIntent.setPackage("com.google.android.apps.maps");
+        return navIntent;
+    }
 
-            mapIntent.setPackage("com.google.android.apps.maps");
-
-            itemView.getContext().startActivity(mapIntent);
-
-        });
+    private Intent getMapIntent() {
+        Uri geoCoordinates = Uri.parse("geo:" + latitude + "," + longitude + "?z=15&q=" + eventAddress);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoCoordinates);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent;
     }
 
     private void findTextViews(@NonNull View itemView) {
         venueTextView = itemView.findViewById(R.id.venue_name_textView);
         dateTextView = itemView.findViewById(R.id.event_date_textView);
         locationTextView = itemView.findViewById(R.id.event_city_state_textView);
+        lineupTextView = itemView.findViewById(R.id.lineup_TextView);
     }
 
     private void setEventInfoTextViews() {
         venueTextView.setText(venueName);
         dateTextView.setText(eventDate);
         locationTextView.setText(eventLocation);
+    }
+
+    private void findImageViews(@NonNull View itemView) {
+        shareImageView = itemView.findViewById(R.id.event_share_image);
+        mapImageView = itemView.findViewById(R.id.event_map_image);
+        navigationImageView = itemView.findViewById(R.id.event_navigation_image);
     }
 
     private void assignEventDateVariables(Event event) {
