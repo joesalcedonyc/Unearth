@@ -22,10 +22,6 @@
             android:layout_marginTop="8dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/event_date_textView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Cielo" />
 
         <TextView
@@ -35,10 +31,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/event_date_textView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/venue_name_textView"
             tools:text="Avision, Alan" />
 
         <TextView
@@ -47,10 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/event_city_state_textView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineup_TextView"
             tools:text="05.31.2019" />
 
         <TextView
@@ -60,10 +48,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_date_textView"
             tools:text="New York, NY" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,6 +83,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="@id/event_share_image" />
             </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
