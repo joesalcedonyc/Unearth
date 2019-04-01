@@ -58,6 +58,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
 
@@ -67,21 +68,26 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_share_24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_share_24dp"/>
+
 
                 <ImageView
                     android:id="@+id/event_map_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_map_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@id/event_share_image" />
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_map_icon" />
+
+                <ImageView
+                    android:id="@+id/event_navigation_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_navigation" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
