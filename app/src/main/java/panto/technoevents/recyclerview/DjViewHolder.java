@@ -8,31 +8,28 @@ import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.ui.OnDJSelectedListener;
 
-public class DjViewHolder extends RecyclerView.ViewHolder {
+class DjViewHolder extends RecyclerView.ViewHolder {
 
     private TextView artistNameTextView;
     private ImageView artistImageView;
 
-    public DjViewHolder(@NonNull View itemView) {
+    DjViewHolder(@NonNull View itemView) {
         super(itemView);
-
         artistNameTextView = itemView.findViewById(R.id.artist_name_textView);
         artistImageView = itemView.findViewById(R.id.artist_image);
-
     }
 
-    public void onBind(OnDJSelectedListener onDJSelectedListener, final DjModel djModel) {
+    void onBind(@NonNull final OnDJSelectedListener onDJSelectedListener, @NonNull final DjModel djModel) {
         artistNameTextView.setText(djModel.getName());
         Picasso.get().load(djModel.getImage())
-                .resize(220, 180)
-                .into(artistImageView);
-
+          .resize(220, 180)
+          .into(artistImageView);
         itemView.findViewById(R.id.dj_cardView)
-                .setOnClickListener(v -> onDJSelectedListener.openEventsFragment(djModel));
-
+          .setOnClickListener(v -> onDJSelectedListener.openEventsFragment(djModel));
     }
 }

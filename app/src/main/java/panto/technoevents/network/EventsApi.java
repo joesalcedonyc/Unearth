@@ -1,6 +1,5 @@
 package panto.technoevents.network;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import panto.technoevents.apimodels.edmtrain.EDMTrainResponse;
 import retrofit2.http.GET;

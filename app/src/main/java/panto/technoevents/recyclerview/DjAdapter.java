@@ -9,6 +9,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.ui.OnDJSelectedListener;
@@ -16,10 +17,9 @@ import panto.technoevents.ui.OnDJSelectedListener;
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     private OnDJSelectedListener onDjSelectedListener;
 
-    List<DjModel> djList = new ArrayList<>();
+    private List<DjModel> djList = new ArrayList<>();
 
-    public DjAdapter(OnDJSelectedListener onDjSelectedListener) {
-
+    public DjAdapter(@NonNull final OnDJSelectedListener onDjSelectedListener) {
         this.onDjSelectedListener = onDjSelectedListener;
     }
 
@@ -40,7 +40,7 @@ public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
         return djList.size();
     }
 
-    public void setData(List<DjModel> djModels) {
+    public void setData(@NonNull final List<DjModel> djModels) {
         djList = djModels;
         notifyDataSetChanged();
     }

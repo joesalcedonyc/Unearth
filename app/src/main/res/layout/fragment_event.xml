@@ -61,5 +61,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_list_artist_name_textView"
         tools:listitem="@layout/event_item_view" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
