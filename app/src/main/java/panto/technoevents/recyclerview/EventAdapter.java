@@ -9,11 +9,11 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import panto.technoevents.R;
 import panto.technoevents.apimodels.edmtrain.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
-
     private List<Event> eventsList = new ArrayList<>();
 
     public EventAdapter() {
@@ -22,17 +22,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_item_view, viewGroup, false);
-
+        View view = LayoutInflater.from(
+          viewGroup.getContext())
+          .inflate(R.layout.event_item_view, viewGroup, false);
         return new EventViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i) {
-
         eventViewHolder.onBind(eventsList.get(i));
-
     }
 
     @Override
@@ -40,7 +38,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         return eventsList.size();
     }
 
-    public void setData(List<Event> events) {
+    public void setData(@NonNull final List<Event> events) {
         eventsList = events;
         notifyDataSetChanged();
     }

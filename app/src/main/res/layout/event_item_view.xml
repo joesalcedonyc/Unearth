@@ -8,7 +8,6 @@
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
             tools:text="Cielo" />
 
         <TextView
-            android:id="@+id/lineup_TextView"
+            android:id="@+id/lineup_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -55,7 +54,6 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -63,17 +61,16 @@
                 app:layout_constraintRight_toRightOf="parent">
 
                 <ImageView
-                    android:id="@+id/event_share_image"
+                    android:id="@+id/event_share_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/ic_share_24dp"/>
-
+                    android:src="@drawable/ic_share_24dp" />
 
                 <ImageView
-                    android:id="@+id/event_map_image"
+                    android:id="@+id/event_map_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -81,7 +78,7 @@
                     android:src="@drawable/ic_map_icon" />
 
                 <ImageView
-                    android:id="@+id/event_navigation_image"
+                    android:id="@+id/event_navigation_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -89,9 +86,6 @@
                     android:src="@drawable/ic_navigation" />
 
             </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

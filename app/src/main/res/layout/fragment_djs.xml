@@ -7,10 +7,10 @@
     tools:context=".ui.DjsFragment">
 
     <ProgressBar
-        android:layout_gravity="center"
         android:id="@+id/indeterminateBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -10,11 +10,11 @@ import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import panto.technoevents.R;
 import panto.technoevents.apimodels.edmtrain.Event;
 
-public class EventViewHolder extends RecyclerView.ViewHolder {
-
+class EventViewHolder extends RecyclerView.ViewHolder {
     private TextView venueTextView;
     private TextView dateTextView;
     private TextView locationTextView;
@@ -28,35 +28,26 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     private String eventAddress;
     private String longitude;
     private String latitude;
-
     private TextView lineupTextView;
 
-    public EventViewHolder(@NonNull View itemView) {
+    EventViewHolder(@NonNull View itemView) {
         super(itemView);
-
         findTextViews(itemView);
         findImageViews(itemView);
     }
 
-    public void onBind(final Event event) {
-
+    void onBind(@NonNull final Event event) {
         venueName = event.getVenue().getName();
         assignEventDateVariables(event);
         assignEventLocationVariables(event);
-
         setEventInfoTextViews();
-
         longitude = Double.toString(event.getVenue().getLongitude());
         latitude = Double.toString(event.getVenue().getLatitude());
-
         String artistNamesToString = Arrays.deepToString(event.getArtistList().toArray());
         lineup = artistNamesToString.substring(1, artistNamesToString.length() - 1);
-
         lineupTextView.setText(lineup);
-
         Intent mapIntent = getMapIntent();
         Intent navIntent = getNavigationIntent();
-
         shareImageView.setOnClickListener(v -> emailEventDetails());
         mapImageView.setOnClickListener(v -> itemView.getContext().startActivity(mapIntent));
         navigationImageView.setOnClickListener(v -> itemView.getContext().startActivity(navIntent));
@@ -80,7 +71,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         venueTextView = itemView.findViewById(R.id.venue_name_textView);
         dateTextView = itemView.findViewById(R.id.event_date_textView);
         locationTextView = itemView.findViewById(R.id.event_city_state_textView);
-        lineupTextView = itemView.findViewById(R.id.lineup_TextView);
+        lineupTextView = itemView.findViewById(R.id.lineup_textView);
     }
 
     private void setEventInfoTextViews() {
@@ -90,9 +81,9 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void findImageViews(@NonNull View itemView) {
-        shareImageView = itemView.findViewById(R.id.event_share_image);
-        mapImageView = itemView.findViewById(R.id.event_map_image);
-        navigationImageView = itemView.findViewById(R.id.event_navigation_image);
+        shareImageView = itemView.findViewById(R.id.event_share_icon);
+        mapImageView = itemView.findViewById(R.id.event_map_icon);
+        navigationImageView = itemView.findViewById(R.id.event_navigation_icon);
     }
 
     private void assignEventDateVariables(Event event) {
@@ -111,11 +102,11 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "We out?");
         emailIntent.putExtra(Intent.EXTRA_TEXT,
-                eventDate + "\n\n" +
-                        lineup + " @\n\n" +
-                        venueName + "\n" +
-                        eventLocation + "\n" +
-                        eventAddress + "\n"
+          eventDate + "\n\n" +
+            lineup + " @\n\n" +
+            venueName + "\n" +
+            eventLocation + "\n" +
+            eventAddress + "\n"
         );
         itemView.getContext().startActivity(emailIntent);
     }

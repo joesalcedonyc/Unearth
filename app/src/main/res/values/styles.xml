@@ -1,14 +1,12 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="android:textColorSecondary">@color/optionsColor</item>
         <item name="actionOverflowButtonStyle">@style/optionsTheme</item>
-
     </style>
 
-    <style name="optionsTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow" >
+    <style name="optionsTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/optionsColor</item>
     </style>
 
