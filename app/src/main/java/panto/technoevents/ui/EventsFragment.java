@@ -10,14 +10,18 @@ import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.apimodels.edmtrain.Event;
 import panto.technoevents.recyclerview.EventAdapter;
 import panto.technoevents.viewmodel.FragmentsViewModel;
 

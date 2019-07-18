@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -52,10 +53,8 @@ public class DjsFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new DjAdapter(onDjSelectedListener);
-
         fragmentsViewModel = ViewModelProviders.of(this).get(FragmentsViewModel.class);
         fragmentsViewModel.loadDjs();
-
     }
 
     @Override
@@ -68,13 +67,15 @@ public class DjsFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-
+        ProgressBar progressBar = view.findViewById(R.id.indeterminateBar);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         fragmentsViewModel.djs.observe(this, new Observer<List<DjModel>>() {
             @Override
             public void onChanged(List<DjModel> djModels) {
+                progressBar.setVisibility(View.INVISIBLE);
                 adapter.setData(djModels);
             }
         });
