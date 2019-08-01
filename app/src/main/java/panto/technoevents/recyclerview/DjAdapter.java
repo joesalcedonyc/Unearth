@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.OnDJSelectedListener;
+import panto.technoevents.ui.onDJSelectedListener;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
-    private OnDJSelectedListener onDjSelectedListener;
+    private onDJSelectedListener onDjSelectedListener;
 
     List<DjModel> djList = new ArrayList<>();
 
-    public DjAdapter(OnDJSelectedListener onDjSelectedListener) {
+    public DjAdapter(onDJSelectedListener onDjSelectedListener) {
 
         this.onDjSelectedListener = onDjSelectedListener;
     }

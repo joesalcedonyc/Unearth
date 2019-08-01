@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.OnDJSelectedListener;
+import panto.technoevents.ui.onDJSelectedListener;
 
 public class DjViewHolder extends RecyclerView.ViewHolder {
 
@@ -25,7 +25,7 @@ public class DjViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void onBind(OnDJSelectedListener onDJSelectedListener, final DjModel djModel) {
+    public void onBind(onDJSelectedListener onDJSelectedListener, final DjModel djModel) {
         artistNameTextView.setText(djModel.getName());
         Picasso.get().load(djModel.getImage())
                 .resize(220, 180)
