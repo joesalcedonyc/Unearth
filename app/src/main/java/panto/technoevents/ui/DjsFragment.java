@@ -23,7 +23,7 @@ import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class DjsFragment extends Fragment {
     private DjAdapter adapter;
-    private OnDJSelectedListener onDjSelectedListener;
+    private onDJSelectedListener onDJSelectedListener;
     private FragmentsViewModel fragmentsViewModel;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
@@ -35,8 +35,8 @@ public class DjsFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        if (context instanceof OnDJSelectedListener) {
-            onDjSelectedListener = (OnDJSelectedListener) context;
+        if (context instanceof onDJSelectedListener) {
+            onDJSelectedListener = (onDJSelectedListener) context;
         } else {
             throw new RuntimeException(context.toString() + "Must be instance of OnDJSelectedListener");
         }
@@ -45,7 +45,7 @@ public class DjsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new DjAdapter(onDjSelectedListener);
+        adapter = new DjAdapter(onDJSelectedListener);
         fragmentsViewModel = ViewModelProviders.of(this).get(FragmentsViewModel.class);
         fragmentsViewModel.loadDjs();
     }

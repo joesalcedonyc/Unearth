@@ -2,7 +2,7 @@ package panto.technoevents.ui;
 
 import panto.technoevents.apimodels.djs.DjModel;
 
-public interface OnDJSelectedListener {
+public interface onDJSelectedListener {
 
     void openEventsFragment(DjModel djModel);
 

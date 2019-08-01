@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.OnDJSelectedListener;
+import panto.technoevents.ui.onDJSelectedListener;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
-    private OnDJSelectedListener onDjSelectedListener;
+    private onDJSelectedListener onDJSelectedListener;
 
     private List<DjModel> djList = new ArrayList<>();
 
-    public DjAdapter(@NonNull final OnDJSelectedListener onDjSelectedListener) {
-        this.onDjSelectedListener = onDjSelectedListener;
+    public DjAdapter(@NonNull final onDJSelectedListener onDJSelectedListener) {
+        this.onDJSelectedListener = onDJSelectedListener;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DjViewHolder djViewHolder, int i) {
-        djViewHolder.onBind(onDjSelectedListener, djList.get(i));
+        djViewHolder.onBind(onDJSelectedListener, djList.get(i));
     }
 
     @Override

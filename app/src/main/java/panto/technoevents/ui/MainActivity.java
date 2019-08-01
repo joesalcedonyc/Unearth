@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
 
-public class MainActivity extends AppCompatActivity implements OnDJSelectedListener {
+public class MainActivity extends AppCompatActivity implements onDJSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
