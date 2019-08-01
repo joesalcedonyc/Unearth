@@ -1,6 +1,9 @@
 package panto.technoevents.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import panto.technoevents.viewmodel.FragmentsViewModel;
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class EventsFragment extends Fragment {
+    private SharedPreferences sharedPreferences;
     private static String artistImageUrl;
     private static String artistName;
     private EventAdapter eventAdapter;
@@ -62,6 +66,8 @@ public class EventsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String SHARED_PREFS_KEY = getString(R.string.preference_file_key);
+        sharedPreferences = view.getContext().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
         ImageView eventArtistImageView = view.findViewById(R.id.event_list_artist_ImageView);
         TextView eventArtistNameTextView = view.findViewById(R.id.event_list_artist_name_textView);
         RecyclerView recyclerView = view.findViewById(R.id.event_list_recyclerView);
@@ -73,7 +79,14 @@ public class EventsFragment extends Fragment {
         eventArtistNameTextView.setText(artistName);
         fragmentsViewModel.djEvents.observe(this, events -> eventAdapter.setData(events));
         ToggleButton favoriteButton = view.findViewById(R.id.favorite_button);
+        sharedPreferences.getBoolean("filled", false);
+        favoriteButton.setChecked(sharedPreferences.getBoolean(djModel.getName(), false));
         favoriteButton.setOnClickListener(v -> {
+            if (favoriteButton.isChecked()) {
+                sharedPreferences.edit().putBoolean(djModel.getName(), true).apply();
+            } else {
+                sharedPreferences.edit().putBoolean(djModel.getName(), false).apply();
+            }
         });
     }
 }

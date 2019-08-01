@@ -7,4 +7,5 @@
     <string name="search_title">DJs</string>
     <string name="github">Github</string>
     <string name="linkedin">Linkedin</string>
+    <string name="preference_file_key">panto.technoevents.PREFERENCE_KEY</string>
 </resources>
