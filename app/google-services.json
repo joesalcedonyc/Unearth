@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "58332007697",
+    "firebase_url": "https://unearth-67bf6.firebaseio.com",
+    "project_id": "unearth-67bf6",
+    "storage_bucket": "unearth-67bf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58332007697:android:fd35d5e4b174d6a6",
+        "android_client_info": {
+          "package_name": "panto.technoevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58332007697-d9qtnqr93k3ctsfi5n9vuobtathd8nis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "panto.technoevents",
+            "certificate_hash": "722ae310bb78bec2ef747f05424517cfaa1c6c5b"
+          }
+        },
+        {
+          "client_id": "58332007697-tpoah52bdc67d7ijqit7at3q785vk8pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrN3XruaSrzvX-p4YTKZPmKtlDYgbaU-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58332007697-tpoah52bdc67d7ijqit7at3q785vk8pe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

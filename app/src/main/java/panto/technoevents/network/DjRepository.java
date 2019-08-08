@@ -1,10 +1,13 @@
 package panto.technoevents.network;
 
+import android.util.Log;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
 
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.djs.DjResponse;
@@ -40,7 +43,7 @@ public class DjRepository {
     private static Retrofit buildRetrofit() {
         if (djRetrofitInstance == null) {
             djRetrofitInstance = new Retrofit.Builder()
-              .baseUrl("https://gist.githubusercontent.com/")
+              .baseUrl("https://unearth-67bf6.firebaseio.com/")
               .addConverterFactory(GsonConverterFactory.create())
               .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
               .build();

@@ -14,6 +14,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.R;
 import panto.technoevents.recyclerview.DjAdapter;
