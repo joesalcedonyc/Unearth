@@ -9,6 +9,10 @@ public class DjModel implements Parcelable {
     private String country;
     private String image;
 
+    private DjModel (){
+
+    }
+
     private DjModel(Parcel in) {
         id = in.readInt();
         name = in.readString();

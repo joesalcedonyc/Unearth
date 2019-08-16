@@ -9,16 +9,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.edmtrain.Event;
+import panto.technoevents.db.RemoteDataBase;
 import panto.technoevents.network.DjRepository;
 
 public class FragmentsViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
     public MutableLiveData<List<DjModel>> djs;
+    public MutableLiveData<List<DjModel>> favorites;
     public MutableLiveData<List<Event>> djEvents;
 
     public FragmentsViewModel() {
         djs = new MutableLiveData<>();
         djEvents = new MutableLiveData<>();
+        favorites = new MutableLiveData<>();
     }
 
     public void loadDjs() {
@@ -33,6 +36,11 @@ public class FragmentsViewModel extends ViewModel {
           .getAllDjEvents(id)
           .observeOn(AndroidSchedulers.mainThread())
           .subscribe(events -> djEvents.setValue(events)));
+    }
+
+    public void loadFavorites() {
+        favorites.setValue(RemoteDataBase.getInstance()
+          .getFavorites());
     }
 
     @Override

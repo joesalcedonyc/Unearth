@@ -1,4 +1,4 @@
-package panto.technoevents.ui;
+package panto.technoevents;
 
 import panto.technoevents.apimodels.djs.DjModel;
 

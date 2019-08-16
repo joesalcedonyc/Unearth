@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.onDJSelectedListener;
 
 public class MainActivity extends AppCompatActivity implements onDJSelectedListener {
 
