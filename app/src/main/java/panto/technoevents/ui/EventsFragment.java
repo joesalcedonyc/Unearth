@@ -3,7 +3,6 @@ package panto.technoevents.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
+import panto.technoevents.db.RemoteDataBase;
 import panto.technoevents.recyclerview.EventAdapter;
 import panto.technoevents.viewmodel.FragmentsViewModel;
 
@@ -55,6 +55,7 @@ public class EventsFragment extends Fragment {
         artistImageUrl = djModel.getImage();
         artistName = djModel.getName();
         fragmentsViewModel.loadEvents(djModel.getId());
+
     }
 
     @Override
@@ -84,8 +85,10 @@ public class EventsFragment extends Fragment {
         favoriteButton.setOnClickListener(v -> {
             if (favoriteButton.isChecked()) {
                 sharedPreferences.edit().putBoolean(djModel.getName(), true).apply();
+                RemoteDataBase.getInstance().addFavorite(djModel);
             } else {
                 sharedPreferences.edit().putBoolean(djModel.getName(), false).apply();
+                RemoteDataBase.getInstance().removeFavorite(djModel);
             }
         });
     }

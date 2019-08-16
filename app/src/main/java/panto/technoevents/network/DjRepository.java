@@ -1,13 +1,10 @@
 package panto.technoevents.network;
 
-import android.util.Log;
-
 import java.util.List;
 
 import androidx.annotation.NonNull;
 
 import io.reactivex.Single;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import panto.technoevents.apimodels.djs.DjModel;
 import panto.technoevents.apimodels.djs.DjResponse;

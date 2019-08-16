@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import panto.technoevents.R;
 import panto.technoevents.apimodels.djs.DjModel;
-import panto.technoevents.ui.onDJSelectedListener;
+import panto.technoevents.onDJSelectedListener;
 
 public class DjAdapter extends RecyclerView.Adapter<DjViewHolder> {
     private onDJSelectedListener onDJSelectedListener;
