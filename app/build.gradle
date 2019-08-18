@@ -39,11 +39,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation 'com.google.firebase:firebase-database:18.0.1'
+    implementation 'com.google.firebase:firebase-database:19.0.0'
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.alespero:expandable-cardview:0.6'

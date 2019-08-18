@@ -1,7 +1,5 @@
 package panto.technoevents.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,40 +21,6 @@ public class MainActivity extends AppCompatActivity implements onDJSelectedListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.github:
-                showGithub();
-                break;
-            case R.id.linkedin:
-                showLinkedIn();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return false;
-    }
-
-    private void showLinkedIn() {
-        Uri uri = Uri.parse("https://www.linkedin.com/in/josephsalcedo/");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
-    private void showGithub() {
-        Uri uri = Uri.parse("https://github.com/joesalcedonyc/TechnoEvents");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
-    @Override
     public void openEventsFragment(DjModel djModel) {
         getSupportFragmentManager()
           .beginTransaction()
@@ -71,5 +35,10 @@ public class MainActivity extends AppCompatActivity implements onDJSelectedListe
           .beginTransaction()
           .replace(R.id.main_container, DjsFragment.newInstance())
           .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+       getSupportFragmentManager().popBackStack();
     }
 }
