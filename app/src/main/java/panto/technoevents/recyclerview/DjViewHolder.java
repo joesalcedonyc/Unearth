@@ -1,5 +1,7 @@
 package panto.technoevents.recyclerview;
 
+import android.content.Context;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,11 @@ class DjViewHolder extends RecyclerView.ViewHolder {
           .resize(220, 180)
           .into(artistImageView);
         itemView.findViewById(R.id.dj_cardView)
-          .setOnClickListener(v -> onDJSelectedListener.openEventsFragment(djModel));
+          .setOnClickListener(v -> {
+              Vibrator vibrator = (Vibrator) itemView.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+              vibrator.vibrate(60);
+              onDJSelectedListener.openEventsFragment(djModel);
+
+          });
     }
 }
